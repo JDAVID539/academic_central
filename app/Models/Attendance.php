@@ -20,17 +20,17 @@ class Attendance extends Model
     //muchos a uno 
     public function student()
     {
-        return $this->hasMany('App\Models\student');
+        return $this->hasMany('App\Models\Student');
     }
 
     //muchos a uno
     public function subjects()
     {
-        return $this->hasMany('App\Models\subject');
+        return $this->hasMany('App\Models\Subject');
     }
     //muchos a uno
     public function students()
     {
-        return $this->hasMany('App\Models\student');
+        return $this->hasMany('App\Models\Student');
     }
 }

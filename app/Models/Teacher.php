@@ -24,4 +24,5 @@ class Teacher extends Model
     public function courses(){
         return $this ->hasMany('app\models\course');
     }
+    
 }

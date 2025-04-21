@@ -15,6 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name_course');
             $table->string('description_course');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')
+                  ->references('id')
+                  ->on('teachers')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+    
+
             $table->timestamps();
         });
         

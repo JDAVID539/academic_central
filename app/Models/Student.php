@@ -17,23 +17,23 @@ class Student extends Model
 
     //resivir la id de usuario
     public function user (){
-        return $this -> belongsTo('app\models\User');
+        return $this -> belongsTo('App\Models\User');
     }
     public function course(){
-        return $this ->belongsTo('app\models\course');
+        return $this ->belongsTo('App\Models\Course');
     }
 
     //estudiantes a calificaciones uno a muchos
-    public function school_grades(){
-        return $this -> hasMany('app\models\school_grade');
+    public function school_Grade(){
+        return $this -> hasMany('App\Models\School_Grade');
     }
 
     public function notifications(){
-        return $this -> hasMany('app\models\notification');
+        return $this -> hasMany('App\Models\Notification');
     }
     
     //estudiantes a asistencia uno a muchos
     public function attendance(){
-        return $this -> belongsTo('app\models\attendance');
+        return $this -> belongsTo('App\Models\Attendance');
     }
 }

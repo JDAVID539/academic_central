@@ -9,20 +9,20 @@ class Subject extends Model
  //ralcion con cursos de uno a muchos
  public function curso()
  {
-     return $this->belongsTo('App\Models\course');
+     return $this->belongsTo('App\Models\Course');
  }
   //tareas con materias de uno a muchos
  public function tasks(){
-     return $this ->hasMany('app\models\task');
+     return $this ->hasMany('App\Models\Task');
  }
  
  //materias con asistencias
  public function attendance(){
-     return $this ->belongsTo('app\models\attendance');
+     return $this ->belongsTo('App\Models\Attendance');
  }
 
  //calificaiones con msterias muchos a uno 
  public function school_grades(){
-     return $this ->hasMany('app\models\scool_grade');
+     return $this ->hasMany('App\Models\School_grade');
  }
 }

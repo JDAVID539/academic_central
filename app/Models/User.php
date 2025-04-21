@@ -64,7 +64,7 @@ class User extends Authenticatable
      // relacion de uno a uno de usuarui a estudiante
      public function student()
      {
-         return $this->hasOne('app\Models\student');
+        return $this->hasOne(Student::class);
      }
  
      //relacion con notificaciones 
@@ -75,6 +75,6 @@ class User extends Authenticatable
      }
      public function role()
     {
-        return $this->belongsTo('App\Models\rol');	
+        return $this->belongsTo('App\Models\Role');	
     }
 }

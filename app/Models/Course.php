@@ -16,15 +16,15 @@ class Course extends Model
     //relacion de usuaario de uno a muchos de cursos con materiaS
     public function subjects()
     {
-        return $this->hasMany('App\Models\subject');
+        return $this->hasMany('App\Models\Subject');
     }
 
     //relacion de uno a muchos con estudiantes 
     public function students()
     {
-        return $this->hasMany('App\Models\student');
+        return $this->hasMany('App\Models\Student');
     }
     public function teacher(){
-        return $this -> belongsTo('app\models\teacher');
+        return $this -> belongsTo('App\Models\Teacher');
     }
 }

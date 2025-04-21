@@ -7,27 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     public function subject(){
-        return $this ->belongsTo('app\models\subject');
+        return $this ->belongsTo('App\Models\Subject');
     }
     public function attendances(){
-        return $this ->hasMany('app\models\attendance');
+        return $this ->hasMany('App\Models\Attendance');
     }
 
     //relacion con materias de uno a muchos
     public function tasks()
     {
-        return $this->hasMany('App\Models\task');
+        return $this->hasMany('App\Models\Task');
     }
 
     //relacion con entrega de tareas de muchos a uno
     public function submit_assignment()
     {
-        return $this->hasMany('App\Models\submit_assignment');
+        return $this->hasMany('App\Models\Submit_assignment');
     }
 
     //relacion con estudiante 
     public function students()
     {
-        return $this->hasMany('App\Models\student');
+        return $this->hasMany('App\Models\Student');
     }
 }
