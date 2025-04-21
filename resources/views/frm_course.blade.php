@@ -26,14 +26,14 @@
         <label>
             Nombre del curso:
             <br>
-            <input type="text" name="name_course" required> <!-- Cambiado a 'name_course' -->
+            <input type="text" name="name_course" required>
         </label>
         <br><br>
 
         <label>
             Descripción del curso:
             <br>
-            <textarea name="description_course" rows="4" required></textarea> <!-- Cambiado a 'description_course' -->
+            <textarea name="description_course" rows="4" required></textarea> 
         </label>
         <br><br>
 

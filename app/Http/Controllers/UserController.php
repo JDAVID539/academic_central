@@ -5,32 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role; // Asegúrate de importar el modelo Role
 
 class UserController extends Controller
 {
     public function create()
     {
-        return view('frm_user');
+        $roles = Role::all();
+        return view('frm_user', compact('roles'));
     }
-
+         
     public function store(Request $request)
-    {
-        // Validación de los datos del formulario
-        $request->validate([
-            'name' => 'required|string|max:255', // Ejemplo: 'John Doe'
-            'email' => 'required|email|unique:users,email', // Ejemplo: 'johndoe@example.com'
-            'password' => 'required|string|min:8', // Ejemplo: 'password123'
-            'rol' => 'required|in:profesor,aprendiz', // Ejemplo: 'profesor' o 'aprendiz'
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8',
+        'rol_id' => 'required|exists:roles,id', 
+    ]);
 
-        // Guarda el usuario en la base de datos
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Encripta la contraseña
-            'rol' => $request->rol, // Guarda el rol
-        ]);
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'rol_id' => $request->rol_id, 
+    ]);
 
-        return redirect()->back()->with('success', 'Usuario registrado correctamente.');
-    }
+    return redirect()->back()->with('success', 'Usuario registrado correctamente.');
+}
 }

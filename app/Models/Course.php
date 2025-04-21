@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
-        'name_course', // Cambiado a 'name_course'
-        'description_course', // Cambiado a 'description_course'
+        'name_course', 
+        'description_course', 
     ];
     //relacion de usuaario de uno a muchos de cursos con materiaS
     public function subjects()

@@ -6,10 +6,14 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');})->name('home');
+
+route::get('/login', function () {
+    return view('login');})->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
@@ -23,3 +27,8 @@ Route::post('/courses', [CourseController::class, 'store'])->name('courses.store
 
 Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+
+
+
+
