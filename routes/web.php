@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 route::get('/login', function () {
     return view('login');})->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('log');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
