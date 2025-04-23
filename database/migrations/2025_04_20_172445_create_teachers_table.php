@@ -22,12 +22,9 @@ return new class extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('cource_id');
-            $table->foreign('cource_id')
-            ->references('id')
-            ->on('courses')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+            // hola como estas
+
+            
 
 
 
