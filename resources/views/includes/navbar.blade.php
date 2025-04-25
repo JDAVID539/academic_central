@@ -15,7 +15,7 @@
             <a class="nav-link active" aria-current="page" href="{{route('login')}}">iniciar secion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('users.create')}}">Registrarse</a>
+            <a class="nav-link active" aria-current="page" href="{{route('colegiio.create')}}">registrar colegio</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

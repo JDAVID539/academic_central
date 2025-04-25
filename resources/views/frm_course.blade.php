@@ -36,6 +36,18 @@
             <textarea name="description_course" rows="4" required></textarea> 
         </label>
         <br><br>
+        
+        <label>
+            Profesor asignado:
+            <br>
+            <select name="teacher_id">
+                <option value="">Seleccione un profesor</option>
+                @foreach ($teachers as $teacher)
+                    <option value="{{ $teacher->id }}">{{ $teacher->user->name }}</option>
+                @endforeach
+            </select>
+        </label>
+        <br><br>
 
         <button type="submit">Registrar Curso</button>
     </form>

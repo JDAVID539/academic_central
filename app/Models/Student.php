@@ -36,4 +36,9 @@ class Student extends Model
     public function attendance(){
         return $this -> belongsTo('App\Models\Attendance');
     }
+
+    public function school(){
+        return $this -> belongsTo('App\Models\School');
+    }
+    
 }

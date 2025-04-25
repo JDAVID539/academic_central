@@ -6,8 +6,10 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrmController;
+use App\Http\Controllers\SchoolController;
 
 Route::get('/', function () {
     return view('home');})->name('home');
@@ -30,6 +32,30 @@ Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 Route::get('/consultas', [OrmController::class, 'consultas']);
+
+Route::get('/frmcontacto', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+//vistas de roles
+Route::get('/admin', function () {
+    return view('vista_admin');})->name('admin');
+
+Route::get('/user', function () {
+    return view('vista_profesores');})->name('teacher.dashboard');
+
+Route::get('/estudiante', function () {
+    return view('vista_usuario');})->name('student.dashboard');
+
+    Route::get('/colegio', function () {
+        return view('vista_colegio');})->name('school.dashboard');
+
+
+
+    
+    Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
+Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
+
+
 
 
 
