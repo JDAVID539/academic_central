@@ -33,6 +33,7 @@ return new class extends Migration
     
 
             $table->timestamps();
+            // C:\xampp\htdocs\academic_central\database\migrations\2025_04_20_172445_create_courses_table.php
         });
         
     }
