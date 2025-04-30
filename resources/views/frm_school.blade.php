@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="margen">
 <center>
     <h1>Registrar Colegio</h1>
 
@@ -80,4 +81,5 @@
         <button type="submit">Registrar Colegio</button>
   
 </center>
+</div>
 @endsection

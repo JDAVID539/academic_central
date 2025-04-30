@@ -46,14 +46,14 @@ Route::get('/user', function () {
 Route::get('/estudiante', function () {
     return view('vista_usuario');})->name('student.dashboard');
 
-    Route::get('/colegio', function () {
-        return view('vista_colegio');})->name('school.dashboard');
+   
 
 
 
     
     Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
 Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
+Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
 
 
 

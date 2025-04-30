@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
+<link rel="stylesheet" href="public/css/styles.css">
+       
+   
 </head>
 
 <body>
@@ -28,6 +30,8 @@
 
  <!-- Enlaces a los archivos JavaScript de Bootstrap (opcional, para funcionalidades adicionales) -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 
     <meta charset="utf-8">

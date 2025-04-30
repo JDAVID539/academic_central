@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\School;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User; 
 
 class SchoolController extends Controller
 {
@@ -36,8 +37,17 @@ class SchoolController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password), 
         ]);
+        
 
         // Redirigir a la vista de éxito o donde desees
         return redirect()->route('home')->with('success', 'Escuela creada con éxito.');
+    }
+    public function index()
+    {
+       
+        $users = User::with('role')->get(); 
+
+        // Retorna la vista con los usuarios
+        return view('vista_colegio', compact('users'));
     }
 }

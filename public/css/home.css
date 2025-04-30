@@ -3,9 +3,9 @@ body {
     font-family: 'Roboto', sans-serif; /* Fuente similar a la de Gescola */
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    line-height: 1,6;
     color: #333; /* Color de texto general */
-    background-color: #f8f8f8; /* Fondo general similar */
+    background-color: #e9dbdb; /* Fondo general similar */
   }
   
   .container {
@@ -58,7 +58,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Alinea el contenido a la izquierda como en Gescola */
-    padding-left: 50px; /* Espacio a la izquierda para el texto */
+    padding-left: 0px; /* Espacio a la izquierda para el texto */
   }
   
   #home-academic-central .hero-slider .slide.active {
@@ -186,7 +186,7 @@ body {
   #home-academic-central .about-academic-central img {
     max-width: 100%;
     height: auto;
-    border-radius: 5px; /* Bordes redondeados para la imagen */
+    border-radius: 0px; /* Bordes redondeados para la imagen */
   }
   
   /* Estilos responsivos (ajustes para pantallas más pequeñas) */
