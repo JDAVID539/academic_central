@@ -1,3 +1,4 @@
+
 {{-- filepath: c:\xampp\htdocs\academic_central\resources\views\frm_user.blade.php --}}
 @extends('layouts.app_modulo')
 
@@ -43,7 +44,11 @@
                 <input type="password" name="password" required>
             </label>
             <br><br>
-
+            <label>
+                Confirmar Contraseña:
+                <br>
+                <input type="password" name="password_confirmation" required>
+            </label>
             <label>
                 Rol:
                 <br>

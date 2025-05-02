@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -23,7 +23,7 @@ class AuthController
             // Buscar el colegio por correo electrónico
             $school = School::where('email', $request->email)->first();
 
-            if ($school && \Hash::check($request->password, $school->password)) {
+            if ($school && Hash::check($request->password, $school->password)) {
                 // Guardar la información del colegio en la sesión
                 $request->session()->put('school_id', $school->id);
                 $request->session()->put('school_name', $school->name);
@@ -31,7 +31,7 @@ class AuthController
                 $request->session()->put('user_type', 'school');
                 
                 // Redirigir al panel del colegio
-                return redirect()->route('school.dashboard')->with('success', 'Bienvenido al panel del colegio.');
+                return redirect()->route('users.create')->with('success', 'Bienvenido al panel del colegio.');
             } else {
                 return redirect()->back()->withErrors(['email' => 'Credenciales incorrectas para el colegio.']);
             }
@@ -41,20 +41,19 @@ class AuthController
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Obtener el usuario autenticado
             $user = Auth::user();
-
-            // Extraer el rol del campo type
-            $expectedRole = explode('_', $request->type)[1]; // Ejemplo: 'user_estudiante' -> 'estudiante'
-
-            // Obtener el rol del usuario desde la base de datos
+        
+            // Obtener el tipo de rol del usuario
+            $expectedRole = explode('_', $request->type)[1]; 
+        
+            // Obtener el nombre del rol desde la tabla roles
             $roleName = DB::table('roles')->where('id', $user->rol_id)->value('name');
-
+        
+            // Verificar si el rol del usuario coincide con el tipo de usuario solicitado
             if ($roleName === $expectedRole) {
-                // Guardar el tipo de usuario en la sesión
                 $request->session()->put('user_type', 'regular');
-                
-                // Redirigir según el rol
+        
+                // Redirigir según el rol del usuario
                 if ($roleName === 'estudiante') {
                     return redirect()->route('student.dashboard');
                 } elseif ($roleName === 'profesor') {
@@ -63,17 +62,16 @@ class AuthController
                     return redirect()->route('moderator.dashboard');
                 }
             } else {
-                // Cerrar sesión si el rol no coincide
+                // Si el rol no coincide, cerrar sesión y mostrar error
                 Auth::logout();
                 return redirect()->back()->withErrors(['role' => 'El rol seleccionado no coincide con el registrado.']);
             }
         }
-
-        // Si las credenciales no son válidas
+        
+        // Si las credenciales no son correctas
         return redirect()->back()->withErrors(['email' => 'Credenciales incorrectas.']);
     }
 
-    // Método para cerrar sesión
     public function logout(Request $request)
     {
         // Verificar si es un colegio o un usuario regular
@@ -84,12 +82,13 @@ class AuthController
             // Cerrar sesión de usuario regular
             Auth::logout();
         }
-        
+
         // Invalidar la sesión y regenerar el token CSRF
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect()->route('login');
     }
 }
+
 

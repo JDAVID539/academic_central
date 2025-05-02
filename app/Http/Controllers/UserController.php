@@ -9,8 +9,6 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\School;
 
-
-
 class UserController extends Controller
 {
     public function create()
@@ -22,8 +20,8 @@ class UserController extends Controller
     public function store(Request $request)
 {
     // Verificar si hay un colegio en la sesión
-    if (!session('is_school') || !session('school_id')) {
-        return redirect()->route('login')->with('error', 'Debe iniciar sesión como colegio para registrar usuarios');
+    if (!session('school_id')) {
+        return redirect()->route('users.create')->with('error', 'No se puede crear un usuario sin un colegio.');
     }
     
     // Obtener el school_id de la sesión
@@ -34,7 +32,9 @@ class UserController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users',
         'password' => 'required|string|min:8|confirmed',
-        'role_id' => 'required|exists:roles,id',
+        'password_confirmation' => 'required|string|min:8',
+
+        'rol_id' => 'required|exists:roles,id',
     ]);
     
     // Crear el nuevo usuario con el school_id
@@ -42,15 +42,67 @@ class UserController extends Controller
     $user->name = $request->name;
     $user->email = $request->email;
     $user->password = Hash::make($request->password);
-    $user->role_id = $request->role_id;
-    $user->school_id = $school_id; // Asignar el school_id de la sesión
+    $user->rol_id = $request->rol_id;
+    $user->school_id = $school_id; 
     $user->save();
     
     return redirect()->back()->with('success', 'Usuario registrado con éxito');
 }
 public function index()
 {
-    $users = User::all();
-    return view('user_list', compact('users'));
+    
+    $school_id = session('school_id');
+
+    
+    if (!$school_id) {
+        return redirect()->back()->with('error', 'No hay colegio activo en sesión.');
+    }
+
+   
+    $users = User::where('school_id', $school_id)
+                 ->with('role') 
+                 ->get();
+    
+    // Pasar los usuarios a la vista
+    return view('vista_colegio', compact('users'));
 }
+public function edit($id)
+{
+    $user = User::findOrFail($id);
+    $roles = Role::all();
+
+    return view('frm_user_edit', compact('user', 'roles'));
+}
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'rol_id' => 'required|exists:roles,id',
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->rol_id = $request->rol_id;
+
+    if ($request->filled('password')) {
+        $request->validate([
+            'password' => 'string|min:8|confirmed',
+        ]);
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+
+    return redirect()->route('users.index')->with('success', 'Usuario actualizado con éxito');
+}
+public function destroy($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('users.index')->with('success', 'Usuario eliminado con éxito');
+}
+
 }

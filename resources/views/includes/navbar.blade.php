@@ -1,6 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\academic_central\resources\views\includes\navbar.blade.php -->
 <nav class="main-header navbar navbar-expand navbar-dark bg-dark">
-  
+   <!--estilopara loginnn-->
+   <link href="../assets/css/login.css" rel="stylesheet" />
 
       <!-- Logo -->
       <a class="navbar-brand" href="#">

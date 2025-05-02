@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Estudiante</title>
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
     <h2>Registrar Estudiante</h2>
@@ -59,7 +60,9 @@
         </label>
         <br><br>
 
-        <button type="submit">Registrar Estudiante</button>
+        <button class="button">
+            <span class="button span">Registrar estudiante</span>
+        </button>
     </form>
 </body>
 </html>

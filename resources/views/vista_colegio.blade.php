@@ -7,32 +7,56 @@
     <br>
     <br>
     <h1>Bienvenido administrador</h1>
+ 
+    <a href="{{ route('users.index') }}" class="btn btn-primary">Ver Usuarios</a>
 
-    <p>Aquí podrás registrar los cursos</p>
-    <a href="{{route('courses.create')}}" class="btn btn-primary">Registrar Cursos</a>
+    
 
-    <p>Aquí se mostrarán los usuarios registrados</p>
+    
+    <div id="usuariosTable">
 
-    <!-- Lista de usuarios -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo Electrónico</th>
-                <th>Rol</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $users)
-                <tr>
-                    <td>{{ $users->id }}</td>
-                    <td>{{ $users->name }}</td>
-                    <td>{{ $users->email }}</td>
-                    <td>{{ $users->role->name ?? 'No tiene rol' }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        <!-- Verificar si hay usuarios -->
+        @if($users->isEmpty())
+            <p>No hay usuarios registrados en esta escuela.</p>
+        @else
+            <!-- Lista de usuarios -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo Electrónico</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role->name ?? 'No tiene rol' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
 </div>
+
+<script>
+    document.getElementById('verUsuariosBtn').addEventListener('click', function() {
+        var table = document.getElementById('usuariosTable');
+        var isTableVisible = table.style.display === 'block';
+        
+        if (isTableVisible) {
+            table.style.display = 'none';  // Oculta la tabla
+        } else {
+            table.style.display = 'block';  // Muestra la tabla
+        }
+    });
+</script>
+
 @endsection
+
+

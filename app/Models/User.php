@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class,'rol_id');
     }
+    // Relación con School
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

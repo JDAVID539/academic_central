@@ -30,4 +30,9 @@ class School extends Model
     {
         return $this->hasMany(Teacher::class);
     }
+    // Relación con el modelo User
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

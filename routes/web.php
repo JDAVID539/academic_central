@@ -31,6 +31,8 @@ Route::post('/courses', [CourseController::class, 'store'])->name('courses.store
 Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
+
+
 Route::get('/consultas', [OrmController::class, 'consultas']);
 
 Route::get('/frmcontacto', [ContactController::class, 'create'])->name('contact.create');
@@ -46,14 +48,21 @@ Route::get('/user', function () {
 Route::get('/estudiante', function () {
     return view('vista_usuario');})->name('student.dashboard');
 
-   
-
-
-
-    
     Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
 Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', fn() => view('vista_admin'))->name('admin');
+});
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+
+
 
 
 

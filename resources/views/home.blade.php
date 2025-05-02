@@ -70,16 +70,17 @@
 </center>
 @endsection
 
+@section('styles')
 <style>
     .hero-slider {
         position: relative;
         overflow: hidden;
-        margin-top: 80px; /* Adjust this value to match your menu height */
-        height: 646px; /* Set a fixed height to prevent content shifting */
+        margin-top: 0; /* Ajusta según la altura de tu header en el nuevo layout */
+        height: 646px; /* Mantén la altura */
     }
 
     .slides {
-        position: relative; /* Needed for absolute positioning of slides */
+        position: relative;
         width: 100%;
         height: 100%;
     }
@@ -90,8 +91,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-size: cover; /* Ensure the image covers the entire slide */
-        background-position: center; /* Center the image within the slide */
+        background-size: cover;
+        background-position: center;
         opacity: 0;
         transition: opacity 0.8s ease-in-out;
     }
@@ -128,31 +129,49 @@
         right: 10px;
     }
 </style>
+@endsection
 
+@section('scripts')
 <script>
-    const slides = document.querySelector('.slides');
-    const slideImages = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    let currentIndex = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelector('.slides');
+        const slideImages = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentIndex = 0;
 
-    function showSlide(index) {
-        slideImages.forEach((slide, i) => {
-            slide.classList.remove('active');
-        });
-        slideImages[index].classList.add('active');
-    }
-
-    function changeSlide(direction) {
-        currentIndex += direction;
-        if (currentIndex < 0) {
-            currentIndex = slideImages.length - 1;
-        } else if (currentIndex >= slideImages.length) {
-            currentIndex = 0;
+        function showSlide(index) {
+            slideImages.forEach((slide, i) => {
+                slide.classList.remove('active');
+            });
+            slideImages[index].classList.add('active');
         }
-        showSlide(currentIndex);
-    }
 
-    // Initial slide
-    showSlide(currentIndex);
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = slideImages.length - 1;
+            } else if (currentIndex >= slideImages.length) {
+                currentIndex = 0;
+            }
+            showSlide(currentIndex);
+        }
+
+        // Initial slide
+        showSlide(currentIndex);
+
+        // Event listeners para los botones
+        if (prevBtn) {
+            prevBtn.onclick = function() {
+                changeSlide(-1);
+            };
+        }
+
+        if (nextBtn) {
+            nextBtn.onclick = function() {
+                changeSlide(1);
+            };
+        }
+    });
 </script>
+@endsection

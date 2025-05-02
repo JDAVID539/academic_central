@@ -34,6 +34,7 @@
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+ 
 </head>
 
 <body class="">
@@ -57,9 +58,9 @@
             </a>
           </li>
           <li>
-            <a href="{{route('users.create')}}">
+            <a href="{{route('school.dashboard')}}">
               <i class="now-ui-icons education_atom"></i>
-              <p>Registrar Usuarios</p>
+              <p>Usuarios</p>
             </a>
           </li>
           <li>
@@ -125,34 +126,49 @@
           </div>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons media-2_sound-wave"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="now-ui-icons location_world"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
+                @if (session('user_type') === 'school')
+  <li class="nav-item">
+    <a class="nav-link text-success" href="#">
+      <i class="now-ui-icons business_bank"></i>
+      <p><span class="d-lg-none d-md-block">Sesión colegio activa</span></p>
+    </a>
+  </li>
+@elseif (Auth::check())
+  <li class="nav-item">
+    <a class="nav-link text-success" href="#">
+      <i class="now-ui-icons users_single-02"></i>
+      <p><span class="d-lg-none d-md-block">Sesión usuario activa</span></p>
+    </a>
+  </li>
+@else
+  <li class="nav-item">
+    <a class="nav-link text-danger" href="#">
+      <i class="now-ui-icons ui-1_lock-circle-open"></i>
+      <p><span class="d-lg-none d-md-block">No autenticado</span></p>
+    </a>
+  </li>
+@endif
+
+<!-- Mostrar nombre -->
+<li class="nav-item">
+  <a class="nav-link text-white" href="#">
+    <i class="now-ui-icons users_single-02"></i>
+    <p class="d-none d-lg-block">
+      Hola, {{ session('user_type') === 'school' ? session('school_name') : Auth::user()->name }}
+    </p>
+  </a>
+</li>
+
+<!-- Botón de cerrar sesión -->
+<li class="nav-item">
+  <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+    @csrf
+    <button type="submit" class="btn btn-danger btn-sm">
+      <i class="now-ui-icons media-1_button-power"></i> Cerrar Sesión
+    </button>
+  </form>
+</li>
+      
             </ul>
           </div>
         </div>
