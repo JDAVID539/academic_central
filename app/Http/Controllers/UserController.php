@@ -50,23 +50,30 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Usuario registrado con éxito');
     }
 
-    public function index()
-    {
-        $school_id = session('school_id');
+    public function index(Request $request)
+{
+    $school_id = session('school_id');
 
-        if (!$school_id) {
-            return redirect()->back()->with('error', 'No hay colegio activo en sesión.');
-        }
-
-        $roles = Role::all();
-
-        $users = User::where('school_id', $school_id)
-                     ->with('role') 
-                     ->get();
-
-        // Pasar los usuarios y roles a la vista
-        return view('view_list_users', compact('users', 'roles'));
+    if (!$school_id) {
+        return redirect()->back()->with('error', 'No hay colegio activo en sesión.');
     }
+
+    $roles = Role::all();
+
+    $query = User::where('school_id', $school_id)->with('role');
+
+    if ($request->filled('buscar')) {
+        $buscar = $request->buscar;
+        $query->where(function ($q) use ($buscar) {
+            $q->where('name', 'like', "%$buscar%")
+              ->orWhere('numero_de_identificacion', 'like', "%$buscar%");
+        });
+    }
+
+    $users = $query->get();
+
+    return view('view_list_users', compact('users', 'roles'));
+}
 
     public function edit($id)
     {
