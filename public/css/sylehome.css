@@ -1,13 +1,45 @@
-font-family: 'Nunito', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Light gray background for the page */
+    color: #333; /* Dark text color for readability */
+}
+    
+    .home-container h1 {
+        font-size: 2.5em;
+        text-align: center;
+        margin: 20px 0;
+        color: #00796b; /* Teal color for headings */
     }
 
+    .home-container p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        margin: 10px 0;
+        color: #555; /* Slightly lighter text for paragraphs */
+    }
+
+    button {
+        background-color: #00796b; /* Teal background for buttons */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #004d40; /* Darker teal on hover */
+    }
     .home-container {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        background-color: #e0f7fa; /* Light cyan background for the page */
+        color: #333; /* Dark text color for readability */
     }
 
     header {
@@ -33,5 +65,4 @@ font-family: 'Nunito', sans-serif;
         color: white;
         text-align: center;
         padding: 1em 0;
-    }
-</style>
+}

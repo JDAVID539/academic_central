@@ -46,7 +46,7 @@ Route::get('/user', function () {
     return view('vista_profesores');})->name('teacher.dashboard');
 
 Route::get('/estudiante', function () {
-    return view('vista_usuario');})->name('student.dashboard');
+    return view('vista_estudiante');})->name('student.dashboard');
 
     Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
 Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
@@ -57,6 +57,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

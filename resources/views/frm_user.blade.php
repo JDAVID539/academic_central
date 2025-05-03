@@ -1,8 +1,6 @@
-
-{{-- filepath: c:\xampp\htdocs\academic_central\resources\views\frm_user.blade.php --}}
 @extends('layouts.app_modulo')
 
-@section('title', 'Registro de Usuario') <!-- Título dinámico para la página -->
+@section('title', 'Registro de Usuario')
 
 @section('content')
 <div class="margen">
@@ -39,16 +37,27 @@
             <br><br>
 
             <label>
+                Número de Identificación:
+                <br>
+                <input type="text" name="numero_de_identificacion" value="{{ old('numero_de_identificacion') }}" required>
+            </label>
+            <br><br>
+
+            
+            <label>
                 Contraseña:
                 <br>
                 <input type="password" name="password" required>
             </label>
             <br><br>
+
             <label>
                 Confirmar Contraseña:
                 <br>
                 <input type="password" name="password_confirmation" required>
             </label>
+            <br><br>
+
             <label>
                 Rol:
                 <br>
@@ -63,7 +72,6 @@
             </label>
             <br><br>
 
-            {{-- Botón de envío --}}
             <button type="submit">Registrar Usuario</button>
         </form>
     </center>

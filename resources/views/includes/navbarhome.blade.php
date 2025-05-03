@@ -11,13 +11,34 @@
 
     @yield('styles') {{-- Aquí se insertarán los estilos específicos de la vista --}}
 </head>
-<body>
+<body></body>
     <div class="home-container">
         <header>
-            <nav>
-                <a href="/">Inicio</a>
-                <a href="{{route'registr}}">Características</a>
-                <a href="/acerca-de">Acerca de</a>
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="/" class="navbar-item">Inicio</a>
+                </div>
+                <div class="navbar-menu">
+                    <div class="navbar-start">
+                        <a href="{{ route('register') }}" class="navbar-item">Registro</a>
+                        <a href="/acerca-de" class="navbar-item">Acerca de</a>
+                    </div>
+                    <div class="navbar-end"> 
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="navbar-item">Panel</a>
+                            <a href="{{ route('logout') }}" class="navbar-item"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="navbar-item">Iniciar sesión</a>
+                            <a href="{{ route('register') }}" class="navbar-item">Registrarse</a>
+                        @endauth
+                    </div>
+                </div>
             </nav>
         </header>
 
@@ -29,9 +50,6 @@
             <p>&copy; {{ date('Y') }} Academic Central</p>
         </footer>
     </div>
-
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    @yield('scripts') {{-- Aquí se insertarán los scripts específicos de la vista --}}
 </body>
 </html>
 

@@ -1,19 +1,3 @@
-<!--navbar admin
-
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,34 +23,33 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
+     <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
       
       <div class="logo">
-        <a href="{{route('school.dashboard')}}" class="simple-text logo-mini">
+        <a href=" class="simple-text logo-mini">
           CT
-        </a>
-        <a href="{{route('school.dashboard')}}" class="simple-text logo-normal">
+        </a> <a href="" class="simple-text logo-normal">
           academic_central
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="desative ">
+          <li class="desative">
             <a href="./dashboard.html">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
-            <a href="{{route('users.index')}}">
+            <a href=">
               <i class="now-ui-icons education_atom"></i>
-              <p>Usuarios</p>
+              <p></p>
             </a>
           </li>
           <li>
             <a href="./user.html">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>perfil de usuario </p>
             </a>
           </li>
           <li>
@@ -79,7 +62,7 @@
           <li>
             <a href="./tables.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
+              <p>Tareas</p>
             </a>
           </li>
           <li>
