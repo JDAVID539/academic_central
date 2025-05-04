@@ -21,6 +21,11 @@
         </div>
 
         <div class="mb-3">
+            <label>Número de Identificación</label>
+            <input type="text" name="numero_de_identificacion" class="form-control" value="{{ $user->numero_de_identificacion }}" required>
+        </div>
+
+        <div class="mb-3">
             <label>Rol</label>
             <select name="rol_id" class="form-control" required>
                 @foreach ($roles as $rol)

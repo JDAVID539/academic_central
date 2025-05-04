@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Usuarios del Colegio</h2>
-        <a href="{{ route('users.create') }}" class="btn btn-primary">➕ Añadir Usuario</a>
+        <a href="{{ route('users.create') }}" class="btn btn-primary ">➕ Añadir Usuario</a>
     </div>
 
     {{-- Mensajes de éxito o error --}}

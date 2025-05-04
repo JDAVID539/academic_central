@@ -9,14 +9,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrmController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 
-Route::get('/', function () {
-    return view('home');})->name('home');
 
-route::get('/login', function () {
-    return view('login');})->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
@@ -28,8 +25,7 @@ Route::post('/students', [StudentController::class, 'store'])->name('students.st
 Route::get('/frmcurso', [CourseController::class, 'create'])->name('courses.create');
 Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
 
-Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
 
 
 
@@ -48,19 +44,13 @@ Route::get('/user', function () {
 Route::get('/estudiante', function () {
     return view('vista_estudiante');})->name('student.dashboard');
 
-    Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
-Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
+    
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', fn() => view('vista_admin'))->name('admin');
 });
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
@@ -69,6 +59,32 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
+//vistas para home  y sus seciones
+Route::get('/', function () { return view('home');})->name('home');
+
+//rutas para inicio de seccion  get y post
+    route::get('/login', function () {return view('login');})->name('login');
+
+     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+//rutas para el formulario de registro de colegio get y post
+Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
+Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
+
+//rutas paara el modulo administrador
+Route::get('/users', [UserController::class, 'index'])->name('users.index');// ruta para ver los usarios registrados y filtrar, eliminar editar y añadir     
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');// ediatr datos de usario
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');// actualizar usarios registrados
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy'); //eliminar  usuarios registrados
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // cerrar secion
+
+Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');//para ver el formulario de registro de usario
+Route::post('/users', [UserController::class, 'store'])->name('users.store');//para enviar el formulario 
+
+//rutas para el modulo de eestudiantes
+Route::get('/estudiante', function () {return view('vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
 
 
-
+Route::get('/userprofile', [ProfileController::class, 'show'])->name('user.perfil')->middleware('auth');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

@@ -64,7 +64,7 @@
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="{{route('user.perfil')}}">
               <i class="now-ui-icons users_single-02"></i>
               <p>User Profile</p>
             </a>
@@ -163,7 +163,7 @@
 <li class="nav-item">
   <form action="{{ route('logout') }}" method="POST" style="display:inline;">
     @csrf
-    <button type="submit" class="btn btn-danger btn-sm">
+    <button type="submit" class="btn btn-dark btn-sm">
       <i class="now-ui-icons media-1_button-power"></i> Cerrar Sesión
     </button>
   </form>

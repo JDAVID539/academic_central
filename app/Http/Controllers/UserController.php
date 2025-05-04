@@ -78,6 +78,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id); // Buscar el usuario por ID
+        $user->load('role'); // Cargar el rol asociado al usuario
+
         $roles = Role::all(); // Obtener todos los roles disponibles
 
         return view('frm_user_edit', compact('user', 'roles')); // Retornar la vista de edición
@@ -88,6 +90,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
+            'numero_de_identificacion' => 'required|string|max:255',
             'rol_id' => 'required|exists:roles,id',
         ]);
 
@@ -95,6 +98,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->rol_id = $request->rol_id;
+        $user->numero_de_identificacion = $request->numero_de_identificacion;
 
         if ($request->filled('password')) {
             $request->validate([
