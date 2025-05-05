@@ -11,7 +11,7 @@
 
         <div class="form-group">
             <label>Foto:</label><br>
-            <img src="{{ asset('storage/' . $user->profile->foto) }}" width="120" height="120"><br><br>
+            <img src="{{ asset('storage/' . $user->profile->foto) }}" width="120" height="120" alt="Foto de perfil"><br><br>
             <input type="file" name="foto" class="form-control">
         </div>
 
@@ -25,7 +25,9 @@
             <input type="email" name="email" class="form-control" value="{{ $user->email }}">
         </div>
 
-    
+     
+       
+
         <div class="form-group">
             <label>Rol:</label>
             <input type="text" name="role" class="form-control" value="{{ $user->role }}">

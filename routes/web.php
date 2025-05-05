@@ -83,8 +83,8 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');//p
 
 //rutas para el modulo de eestudiantes
 Route::get('/estudiante', function () {return view('vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
-
-
-Route::get('/userprofile', [ProfileController::class, 'show'])->name('user.perfil')->middleware('auth');
+Route::get('/user/perfil', [ProfileController::class, 'show'])->name('user.perfil');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
