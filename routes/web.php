@@ -11,9 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrmController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
-
-
-
+use App\Http\Controllers\SubjectController;
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
@@ -88,3 +86,18 @@ Route::get('/estudiante', function () {return view('vista_estudiante');})->name(
 Route::get('/userprofile', [ProfileController::class, 'show'])->name('user.perfil')->middleware('auth');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');//mostrar lista de loscursos donde puede agregar  eliminar y editar   
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');//mostrar formulario para editar un curso
+Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');//actualizar datos de un curso
+Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');//eliminar un curso
+
+
+//rutas para subjects
+Route::get('/subjects', [SubjectController::class, 'create'])->name('subjects.create');//mostrar formulario para agregar una  materia
+Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');//guardar una materia
+Route::get('/subjects/{id}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');//mostrar formulario para editar un curso
+Route::get('/courses/{id}/subjects', [CourseController::class, 'showSubjects'])->name('courses.subjects');
+
+
+

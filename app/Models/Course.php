@@ -13,6 +13,7 @@ class Course extends Model
         'name_course', 
         'description_course', 
         'teacher_id',
+        'school_id',
     ];
     //relacion de usuaario de uno a muchos de cursos con materiaS
     public function subjects()

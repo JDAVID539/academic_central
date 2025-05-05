@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+    protected $fillable = [
+        'name_subject',
+        'course_id',
+        'teacher_id',
+    ];
  //ralcion con cursos de uno a muchos
- public function curso()
+ public function course()
  {
      return $this->belongsTo('App\Models\Course');
  }
@@ -24,5 +29,10 @@ class Subject extends Model
  //calificaiones con msterias muchos a uno 
  public function school_grades(){
      return $this ->hasMany('App\Models\School_grade');
+ }
+
+ //materias con profesores
+ public function teacher(){
+     return $this ->belongsTo('App\Models\Teacher');
  }
 }

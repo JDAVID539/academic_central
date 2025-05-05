@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'school_id',
+        'specialty',
+    ];
     //resivir id de user
    public function user(){
     return $this->belongsTo("App\models\User");
@@ -23,7 +28,7 @@ class Teacher extends Model
     }
     //relacion con cursos de muchos a uno
     public function courses(){
-        return $this ->hasMany('app\models\course');
+        return $this ->hasMany('App\models\course');
     }
     //relacion con la escuela de muchos a uno
     public function school()
