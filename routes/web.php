@@ -81,9 +81,10 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');//p
 
 //rutas para el modulo de eestudiantes
 Route::get('/estudiante', function () {return view('vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
+Route::get('/user/perfil', [ProfileController::class, 'show'])->name('user.perfil');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-
-Route::get('/userprofile', [ProfileController::class, 'show'])->name('user.perfil')->middleware('auth');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
@@ -97,7 +98,7 @@ Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('cour
 Route::get('/subjects', [SubjectController::class, 'create'])->name('subjects.create');//mostrar formulario para agregar una  materia
 Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');//guardar una materia
 Route::get('/subjects/{id}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');//mostrar formulario para editar un curso
-Route::get('/courses/{id}/subjects', [CourseController::class, 'showSubjects'])->name('courses.subjects');
+Route::get('/courses/{id}/subjects', [CourseController::class, 'showSubjects'])->name('courses.subjects');//mostrar materias de un curso
 
 
 
