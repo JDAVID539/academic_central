@@ -45,7 +45,8 @@ class SchoolController extends Controller
     public function index()
     {
        
-        $users = User::with('role')->get(); 
+        $users = User::with('role')->get();
+        
 
         // Retorna la vista con los usuarios
         return view('vista_colegio', compact('users'));

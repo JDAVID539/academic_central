@@ -10,6 +10,8 @@ use App\Models\Teacher;
 
 class StudentController extends Controller
 {
+
+    
     public function create()
     {
         // Obtiene los datos necesarios para los select del formulario

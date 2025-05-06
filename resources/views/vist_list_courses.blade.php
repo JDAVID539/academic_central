@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <br>
     <h2>Lista de Cursos</h2>
-    <a href="{{ route('subjects.create') }}">agregar materia </a>
+    
     <a href="{{ route('courses.create') }}" class="btn btn-primary mb-3">Agregar Curso</a>
     <form method="GET" action="{{ route('courses.index') }}">
         <div class="mb-3">
@@ -34,7 +34,7 @@
 
                         <td>
                             <!-- Botones futuros para editar/eliminar -->
-                            <a href="{{ route('courses.subjects', $course->id) }}" class="btn btn-info btn-sm">Ver materias</a>
+                            <a href="{{ route('courses.subjects', $course->id) }}" class="btn btn-info btn-sm">Ver mas</a>
                             <a href="{{route('courses.edit', $course->id)}}" class="btn btn-warning btn-sm">Editar</a>
                             <form action="{{ route('courses.destroy', $course->id) }}" method="POST" style="display:inline;">
                                 @csrf

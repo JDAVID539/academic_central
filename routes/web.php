@@ -37,7 +37,7 @@ Route::get('/admin', function () {
     return view('vista_admin');})->name('admin');
 
 Route::get('/user', function () {
-    return view('vista_profesores');})->name('teacher.dashboard');
+    return view('vista_colegio');})->name('teacher.dashboard');
 
 Route::get('/estudiante', function () {
     return view('vista_estudiante');})->name('student.dashboard');
@@ -48,13 +48,6 @@ Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboa
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', fn() => view('vista_admin'))->name('admin');
 });
-
-
-
-
-
-
-
 
 
 //vistas para home  y sus seciones
@@ -82,8 +75,8 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');//p
 //rutas para el modulo de eestudiantes
 Route::get('/estudiante', function () {return view('vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
 Route::get('/user/perfil', [ProfileController::class, 'show'])->name('user.perfil');
-Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -98,7 +91,14 @@ Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('cour
 Route::get('/subjects', [SubjectController::class, 'create'])->name('subjects.create');//mostrar formulario para agregar una  materia
 Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');//guardar una materia
 Route::get('/subjects/{id}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');//mostrar formulario para editar un curso
+Route::delete('/subjects/{id}', [SubjectController::class, 'destroy'])->name('subjects.destroy');//eliminar una materia
+Route::put('/subjects/{id}', [SubjectController::class, 'update'])->name('subjects.update');//actualizar una materia
 Route::get('/courses/{id}/subjects', [CourseController::class, 'showSubjects'])->name('courses.subjects');//mostrar materias de un curso
 
 
+Route::post('/subject/store', [SubjectController::class, 'store'])->name('frm_subject');
+
+Route::post('/courses/assign-student', [CourseController::class, 'assignStudent'])->name('courses.assignStudent');
+
+Route::get('/list_course_teacher', [CourseController::class, 'listTeacherCourses'])->name('list_course_teacher');
 

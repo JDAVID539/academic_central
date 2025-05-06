@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Role; 
 use Illuminate\Support\Facades\Auth;
 use App\Models\School;
-use App\Models\Teacher; // ✅ Asegúrate de importar el modelo Teacher
+use App\Models\Teacher; // 
+use App\Models\Student; //
 
 class UserController extends Controller
 {
@@ -19,43 +20,55 @@ class UserController extends Controller
     }
          
     public function store(Request $request)
-    {
-        if (!session('school_id')) {
-            return redirect()->route('users.create')->with('error', 'No se puede crear un usuario sin un colegio.');
-        }
-
-        $school_id = session('school_id');
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'numero_de_identificacion' => 'required|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
-            'rol_id' => 'required|exists:roles,id',
-        ]);
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->numero_de_identificacion = $request->numero_de_identificacion;
-        $user->password = Hash::make($request->password);
-        $user->rol_id = $request->rol_id;
-        $user->school_id = $school_id;
-        $user->save();
-
-        // ✅ Crear automáticamente el registro en la tabla teachers si el rol es profesor
-        $rolProfesor = Role::where('name', 'Profesor')->first();
-        if ($rolProfesor && $user->rol_id == $rolProfesor->id) {
-            Teacher::create([
-                'user_id' => $user->id,
-                'school_id' => $school_id,
-                'specialty' => 'General', // Puedes personalizar esto luego
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Usuario registrado con éxito');
+{
+    if (!session('school_id')) {
+        return redirect()->route('users.create')->with('error', 'No se puede crear un usuario sin un colegio.');
     }
+
+    $school_id = session('school_id');
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'numero_de_identificacion' => 'required|string|max:255',
+        'password' => 'required|string|min:8|confirmed',
+        'password_confirmation' => 'required|string|min:8',
+        'rol_id' => 'required|exists:roles,id',
+    ]);
+
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->numero_de_identificacion = $request->numero_de_identificacion;
+    $user->password = Hash::make($request->password);
+    $user->rol_id = $request->rol_id;
+    $user->school_id = $school_id;
+    $user->save();
+
+    // Registrar profesor
+    $rolProfesor = Role::where('name', 'Profesor')->first();
+    if ($rolProfesor && $user->rol_id == $rolProfesor->id) {
+        Teacher::create([
+            'user_id' => $user->id,
+            'school_id' => $school_id,
+            'specialty' => 'General',
+        ]);
+    }
+
+    // Registrar estudiante
+    $rolestudiante = Role::where('name', 'Estudiante')->first();
+if ($rolestudiante && $user->rol_id == $rolestudiante->id) {
+    Student::create([
+        'user_id' => $user->id,
+        'school_id' => $school_id,
+        'course_id' => null, // Puedes asignarlo después si quieres
+        'teacher_assigned_id' => null, // También puedes asignarlo después
+    ]);
+}
+
+    return redirect()->back()->with('success', 'Usuario registrado con éxito');
+}
+
 
     public function index(Request $request)
     {

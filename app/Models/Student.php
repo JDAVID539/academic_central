@@ -13,14 +13,16 @@ class Student extends Model
         'user_id',
         'course_id',
         'teacher_assigned_id',
+        'school_id'
     ];
 
     //resivir la id de usuario
-    public function user (){
-        return $this -> belongsTo('App\Models\User');
+    public function user() {
+        return $this->belongsTo('App\Models\User');
     }
-    public function course(){
-        return $this ->belongsTo('App\Models\Course');
+    
+    public function Course(){
+        return $this ->belongsto('App\Models\Course');
     }
 
     //estudiantes a calificaciones uno a muchos
@@ -36,6 +38,7 @@ class Student extends Model
     public function attendance(){
         return $this -> belongsTo('App\Models\Attendance');
     }
+    //relacionconcolegio 
 
     public function school(){
         return $this -> belongsTo('App\Models\School');

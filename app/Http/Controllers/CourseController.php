@@ -135,8 +135,49 @@ public function destroy($id)
 
 public function showSubjects($id)
 {
-    $course = Course::with('subjects.teacher.user')->findOrFail($id);
-    return view('vist_show_course', compact('course'));
+    $school_id = session('school_id');
+
+    if (!$school_id) {
+        return redirect()->back()->with('error', 'No hay colegio activo en sesión.');
+    }
+
+    $course = Course::findOrFail($id);
+    $subjects = $course->subjects()->with('teacher.user')->paginate(6);
+    $teachers = Teacher::with('user')->where('school_id', $school_id)->get();
+
+    $available_students = \App\Models\Student::with('user')
+    ->where('school_id', $school_id)
+    ->where(function($query) use ($course) {
+        $query->where('course_id', '!=', $course->id)
+              ->orWhereNull('course_id');
+    })
+    ->get();
+
+
+    $students = $course->students()->paginate(6);
+
+    return view('vist_show_course', compact('course', 'teachers', 'subjects', 'students', 'available_students'));
 }
+
+public function assignStudent(Request $request)
+{
+    $request->validate([
+        'course_id' => 'required|exists:courses,id',
+        'student_id' => 'required|exists:students,id',
+    ]);
+
+    $student = \App\Models\Student::findOrFail($request->student_id);
+    $student->course_id = $request->course_id;
+    $student->save();
+
+    return redirect()->back()->with('success', 'Estudiante agregado al curso.');
+}
+public function listTeacherCourses()
+{
+    $teacher_id = session('teacher_id'); // o Auth::user()->teacher->id si usas autenticación
+    $courses = Course::where('teacher_id', $teacher_id)->get();
+    return view('vist_lis_course_teacher', compact('courses'));
+}
+
 
 }

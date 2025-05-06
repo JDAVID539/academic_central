@@ -27,7 +27,7 @@ class Teacher extends Model
          return $this->hasMany('App\Models\subject');
     }
     //relacion con cursos de muchos a uno
-    public function courses(){
+    public function course(){
         return $this ->hasMany('App\models\course');
     }
     //relacion con la escuela de muchos a uno
