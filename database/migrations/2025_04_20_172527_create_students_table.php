@@ -21,14 +21,14 @@ return new class extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
             ->references('id')
             ->on('courses')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('teacher_assigned_id');
+            $table->unsignedBigInteger('teacher_assigned_id')->nullable();
             $table->foreign('teacher_assigned_id')
             ->references('id')
             ->on('teachers')

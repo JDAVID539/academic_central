@@ -59,7 +59,7 @@ class AuthController
                 } elseif ($roleName === 'profesor') {
                     return redirect()->route('teacher.dashboard');
                 } elseif ($roleName === 'moderador') {
-                    return redirect()->route('moderator.dashboard');
+                    return redirect()->route('admin');
                 }
             } else {
                 // Si el rol no coincide, cerrar sesión y mostrar error

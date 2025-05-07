@@ -1,19 +1,3 @@
-<!--navbar admin
-
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,34 +23,33 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
+     <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
       
       <div class="logo">
-        <a href="{{route('teacher.dashboard')}}" class="simple-text logo-mini">
+        <a href=" class="simple-text logo-mini">
           CT
-        </a>
-        <a href="{{route('teacher.dashboard')}}" class="simple-text logo-normal">
+        </a> <a href="" class="simple-text logo-normal">
           academic_central
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="desative ">
-            <a href={{route('teacher.dashboard')}}>
+          <li class="desative">
+            <a href="./dashboard.html">
               <i class="now-ui-icons design_app"></i>
               <p>inicio</p>
             </a>
           </li>
           <li>
-            <a href="{{route('users.index')}}">
+            <a href=">
               <i class="now-ui-icons education_atom"></i>
-              <p>cursos</p>
+              <p></p>
             </a>
           </li>
           <li>
             <a href="{{route('user.perfil')}}">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>perfil de usuario </p>
             </a>
           </li>
           <li>
@@ -77,17 +60,12 @@
           </li>
           
           <li>
-            <a href="./tables.html">
+            <a href="{{route('list_course_teacher')}}">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
+              <p>cursos</p>
             </a>
           </li>
-          <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
-            </a>
-          </li>
+          
           
         </ul>
       </div>
@@ -163,7 +141,7 @@
 <li class="nav-item">
   <form action="{{ route('logout') }}" method="POST" style="display:inline;">
     @csrf
-    <button type="submit" class="btn btn-dark btn-sm">
+    <button type="submit" class="btn btn-danger btn-sm">
       <i class="now-ui-icons media-1_button-power"></i> Cerrar Sesión
     </button>
   </form>
