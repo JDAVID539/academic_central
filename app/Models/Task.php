@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+
+protected $fillable = [
+        'name',
+        'description',
+        'deadline',
+        'subject_id',
+        'course_id',
+    ];
+
     public function subject(){
         return $this ->belongsTo('App\Models\Subject');
     }

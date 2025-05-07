@@ -26,5 +26,14 @@ class TeacherController extends Controller
         return view('vist_lis_materias_teacher', compact('subjects'));
     }
     
+    public function showAssignTaskForm($subjectId)
+    {
+        $subject = Subject::findOrFail($subjectId);
+        $tasks = $subject->tasks; // Obtener tareas relacionadas
+        return view('assign_task', compact('subject', 'tasks'));
+    }
+    
+
+
 
 }

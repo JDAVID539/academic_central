@@ -13,9 +13,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TaskController;
 
-Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
-Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
+Route::get('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'create'])->name('teacher.subjects.attendanceForm');
+Route::post('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'storeMassAttendance'])->name('teacher.subjects.storeAttendance');
+Route::get('/teacher/subjects/{subject}/attendance/history', [AttendanceController::class, 'attendanceHistory'])->name('teacher.subjects.attendanceHistory');
+
+
 // Rutas de estudiantes 
 Route::get('/frmestudent', [StudentController::class, 'create'])->name('frm.create');
 Route::post('/students', [StudentController::class, 'store'])->name('students.store');
@@ -115,5 +119,21 @@ Route::get('/students/search', [CourseController::class, 'searchStudents'])->nam
 Route::middleware(['auth'])->group(function () {
     Route::get('/teacher/subjects', [TeacherController::class, 'listAssignedSubjects'])->name('teacher.subjects.list');// Mostrar las materias asignadas al profesor
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/teacher/subjects/{subject}/assign-task', [TeacherController::class, 'showAssignTaskForm'])->name('teacher.subjects.assignTaskForm');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/teacher/tasks/store', [TeacherController::class, 'storeTask'])->name('teacher.tasks.store');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+});
+
+//rutas para tomar 
+
+
 
 

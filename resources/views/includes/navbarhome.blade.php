@@ -20,7 +20,6 @@
                 </div>
                 <div class="navbar-menu">
                     <div class="navbar-start">
-                        <a href="{{ route('register') }}" class="navbar-item" style="color: white;">Registro</a>
                         <a href="/acerca-de" class="navbar-item" style="color: white;">Acerca de</a>
                     </div>
                     <div class="navbar-end"> 
@@ -78,6 +77,6 @@
     </style>
 </body>
 </html>
-
+{{-- Removed script for buttons --}}
 
         

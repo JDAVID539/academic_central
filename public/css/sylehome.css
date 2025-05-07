@@ -20,28 +20,6 @@ body {
         color: #555; /* Slightly lighter text for paragraphs */
     }
 
-    button {
-        background-color: #00796b; /* Teal background for buttons */
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 1em;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #004d40; /* Darker teal on hover */
-    }
-    .home-container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background-color: #e0f7fa; /* Light cyan background for the page */
-        color: #333; /* Dark text color for readability */
-    }
-
     header {
         background-color: #333;
         color: white;
@@ -65,4 +43,6 @@ body {
         color: white;
         text-align: center;
         padding: 1em 0;
-}
+    }
+
+  

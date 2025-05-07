@@ -9,10 +9,10 @@ class Attendance extends Model
 {
     use HasFactory;
     protected $table = 'attendances'; 
-    protected $primaryKey = 'id_attendance';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'attendance_date',
-        'id_student',
+        'student_id',
         'present',
     ];
     
@@ -20,7 +20,7 @@ class Attendance extends Model
     //muchos a uno 
     public function student()
     {
-        return $this->hasMany('App\Models\Student');
+        return $this->belongsTo('App\Models\Student');
     }
 
     //muchos a uno

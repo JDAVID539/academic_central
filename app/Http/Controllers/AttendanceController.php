@@ -5,33 +5,62 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\Student;
-
+use App\Models\Subject;
+use App\Models\Course;
+use Carbon\Carbon;
 class AttendanceController extends Controller
 {
-    public function create()
+   
+
+    public function create($subjectId)
     {
-        // Obtiene todos los estudiantes para mostrarlos en el formulario
-        $students = Student::all();
-        return view('frm_attendence', compact('students'));
+        $subject = Subject::findOrFail($subjectId);
+        $students = $subject->course->students;
+    
+        $today = Carbon::today()->toDateString();
+    
+        $attendancesToday = Attendance::whereIn('student_id', $students->pluck('id'))
+            ->where('attendance_date', $today)
+            ->get();
+    
+        return view('frm_attendence', compact('subject', 'students', 'attendancesToday'));
+    }
+    
+
+public function storeMassAttendance(Request $request, $subjectId)
+{
+    $request->validate([
+        'attendance_date' => 'required|date',
+        'attendance' => 'required|array',
+        'attendance.*.student_id' => 'required|exists:students,id',
+    ]);
+
+    foreach ($request->attendance as $att) {
+        $present = isset($att['present']) ? 1 : 0;
+        Attendance::updateOrCreate(
+            [
+                'attendance_date' => $request->attendance_date,
+                'student_id' => $att['student_id'],
+            ],
+            ['present' => $present]
+        );
     }
 
-    public function store(Request $request)
-    {
-        
-        $request->validate([
-            'attendance_date' => 'required|date',
-            'id_student' => 'required|exists:students,id', 
-            'present' => 'required|boolean',
-        ]);
+    return redirect()->back()->with('success', 'Asistencia registrada correctamente.');
+}
 
-        
-        $attendance = new Attendance();
-        $attendance->attendance_date = $request->attendance_date;
-        $attendance->id_student = $request->id_student;
-        $attendance->present = $request->present;
-        $attendance->save();
+public function attendanceHistory($subjectId)
+{
+    $subject = Subject::findOrFail($subjectId);
+    $students = $subject->course->students;
 
-        return redirect()->back()->with('success', 'Asistencia registrada correctamente.');
-    }
+    $attendances = Attendance::whereIn('student_id', $students->pluck('id'))
+        ->orderBy('attendance_date', 'desc')
+        ->get();
+
+    return view('attendance_history', compact('subject', 'attendances'));
+}
+
+
 }
 

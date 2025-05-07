@@ -1,56 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Asistencia</title>
-</head>
-<body>
-    <h2>Registrar Asistencia</h2>
+@extends('layouts.app_moduloteacher')
 
-    @if (session('success'))
-        <p style="color: green">{{ session('success') }}</p>
-    @endif
+@section('content')
+<br>
+<br>
+<h1>asistencia</h1>
+<form action="{{ route('teacher.subjects.storeAttendance', $subject->id) }}" method="POST">
+    @csrf
+    <label for="attendance_date">Fecha de asistencia:</label>
+    <input type="date" name="attendance_date" id="attendance_date" required>
 
-    @if ($errors->any())
-        <ul style="color: red;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+    <table>
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Presente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($students as $index => $student)
+            <tr>
+                <td>{{ $student->user->name }}</td>
+                <td>
+                    <input type="hidden" name="attendance[{{ $index }}][student_id]" value="{{ $student->id }}">
+                    <input type="checkbox" name="attendance[{{ $index }}][present]" value="1">
+                </td>
+            </tr>
             @endforeach
-        </ul>
-    @endif
+        </tbody>
+    </table>
 
-    <form action="{{ route('asistencia.store') }}" method="POST">
-        @csrf
+    <button type="submit">Guardar asistencia</button>
+</form>
+<a href="{{ route('teacher.subjects.attendanceHistory', $subject->id) }}" class="btn btn-info mt-3">Ver toda la asistencia</a>
 
-        <label>
-            Ingrese fecha de asistencia:
-            <br>
-            <input type="date" name="attendance_date" required>
-        </label>
-        <br><br>
 
-        <label>
-            Seleccione un estudiante:
-            <br>
-            <select name="id_student" required>
-                <option value="">Seleccione un estudiante</option>
-                @foreach ($students as $student)
-                    <option value="{{ $student->id }}">{{ $student->name }}</option>
-                @endforeach
-            </select>
-        </label>
-        <br><br>
-
-        <label>
-            Ingrese si está presente:
-            <br>
-            <input type="radio" name="present" value="1" required> Presente
-            <input type="radio" name="present" value="0" required> Ausente
-        </label>
-        <br><br>
-
-        <button type="submit">Registrar Asistencia</button>
-    </form>
-</body>
-</html>
+@endsection
