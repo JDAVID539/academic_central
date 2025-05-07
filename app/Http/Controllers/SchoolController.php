@@ -43,12 +43,24 @@ class SchoolController extends Controller
         return redirect()->route('home')->with('success', 'Escuela creada con éxito.');
     }
     public function index()
-    {
-       
-        $users = User::with('role')->get();
-        
+{
+    $students = User::where('role', 'estudiante')->get();
+    $teachers = User::where('role', 'profesor')->get();
+    $admins = User::where('role', 'administrador')->get();
+    // Obtener usuarios agrupados por roles
+    $students = User::whereHas('role', function ($query) {
+        $query->where('name', 'Estudiante');
+    })->get();
 
-        // Retorna la vista con los usuarios
-        return view('vista_colegio', compact('users'));
-    }
+    $teachers = User::whereHas('role', function ($query) {
+        $query->where('name', 'Profesor');
+    })->get();
+
+    $admins = User::whereHas('role', function ($query) {
+        $query->where('name', 'Administrador');
+    })->get();
+
+    // Retorna la vista con los usuarios clasificados
+    return view('vista_colegio', compact('students', 'teachers', 'admins'));
+}
 }

@@ -33,6 +33,27 @@ class TeacherController extends Controller
         return view('assign_task', compact('subject', 'tasks'));
     }
     
+    public function storeTask(Request $request)
+{
+    $request->validate([
+        'subject_id' => 'required|exists:subjects,id',
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'due_date' => 'nullable|date',
+    ]);
+
+    $task = new \App\Models\Task();
+    $task->subject_id = $request->subject_id;
+    $task->title = $request->title;
+    $task->description = $request->description;
+    $task->due_date = $request->due_date;
+    $task->save();
+
+    // Redirigir a la vista de asignar tarea con la lista actualizada
+    return redirect()->route('teacher.subjects.assignTaskForm', $request->subject_id)
+        ->with('success', 'Tarea añadida correctamente.');
+}
+
 
 
 

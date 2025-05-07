@@ -26,18 +26,18 @@
      <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
       
       <div class="logo">
-        <a href=" class="simple-text logo-mini">
-          CT
-        </a> <a href="" class="simple-text logo-normal">
+        <a href="{{route('student.dashboard')}}" class="simple-text logo-mini">
+         AC
+        </a> <a href="{{route('student.dashboard')}}" class="simple-text logo-normal">
           academic_central
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li class="desative">
-            <a href="./dashboard.html">
+            <a href="{{route('student.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
-              <p>Dashboard</p>
+              <p>inicio</p>
             </a>
           </li>
           <li>
@@ -60,15 +60,15 @@
           </li>
           
           <li>
-            <a href="./tables.html">
+<a href="{{route('student.subjects', ['id' => auth()->user()->student->id])}}">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Tareas</p>
+              <p>materias</p>
             </a>
           </li>
           <li>
             <a href="./typography.html">
               <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
+              <p>Tareas</p>
             </a>
           </li>
           

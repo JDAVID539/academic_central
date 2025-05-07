@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Submit_Assignment extends Model
 {
+    protected $table = 'submit_assignments';
+
+    protected $fillable = [
+        'file_path',
+        'delivery_date',
+        'task_id',
+        'student_id'
+    ];
      //realcion con tareas 
      public function task()
      {

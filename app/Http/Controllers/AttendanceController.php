@@ -49,17 +49,37 @@ public function storeMassAttendance(Request $request, $subjectId)
     return redirect()->back()->with('success', 'Asistencia registrada correctamente.');
 }
 
-public function attendanceHistory($subjectId)
+public function attendanceHistory(Request $request, $subjectId)
 {
     $subject = Subject::findOrFail($subjectId);
     $students = $subject->course->students;
 
-    $attendances = Attendance::whereIn('student_id', $students->pluck('id'))
-        ->orderBy('attendance_date', 'desc')
-        ->get();
+    $studentId = $request->query('student_id');
+    $filteredStudent = null;
 
-    return view('attendance_history', compact('subject', 'attendances'));
+    if ($studentId) {
+        // Filtrar asistencias por estudiante
+        $attendances = Attendance::where('student_id', $studentId)
+            ->orderBy('attendance_date', 'desc')
+            ->get();
+
+        $filteredStudent = $students->where('id', $studentId)->first();
+
+        // Pasar solo las asistencias filtradas y el estudiante filtrado
+        return view('attendance_history', compact('subject', 'students', 'attendances', 'filteredStudent'));
+    } else {
+        // Obtener todas las asistencias agrupadas por fecha
+        $attendancesByDate = Attendance::whereIn('student_id', $students->pluck('id'))
+            ->orderBy('attendance_date', 'desc')
+            ->get()
+            ->groupBy('attendance_date');
+
+        // Pasar null para filteredStudent para evitar error en la vista
+        return view('attendance_history', compact('subject', 'students', 'attendancesByDate', 'filteredStudent'));
+    }
 }
+
+
 
 
 }

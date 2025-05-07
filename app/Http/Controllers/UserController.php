@@ -140,4 +140,12 @@ if ($rolestudiante && $user->rol_id == $rolestudiante->id) {
 
         return redirect()->route('users.index')->with('success', 'Usuario eliminado con éxito');
     }
+    public function show($id)
+    {
+        $user = User::with('role')->findOrFail($id);
+    
+        return view('user_details', compact('user'));
+    }
+
+ 
 }

@@ -40,4 +40,21 @@ class StudentController extends Controller
 
         return redirect()->back()->with('success', 'Estudiante registrado correctamente.');
     }
+
+    public function showSubjectsForStudent($studentId)
+{
+    $student = \App\Models\Student::findOrFail($studentId);
+    $course = $student->Course;
+    $subjects = $course ? $course->subjects : collect();
+
+    return view('materias_estudent', compact('student', 'subjects'));
+}
+public function showSubjectTasks($subjectId)
+{
+    $subject = \App\Models\Subject::findOrFail($subjectId);
+    $tasks = $subject->tasks; // Asumiendo que la relación está definida en el modelo Subject
+
+    return view('student_subject_tasks', compact('subject', 'tasks'));
+}
+
 }

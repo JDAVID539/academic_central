@@ -19,7 +19,7 @@
                     <td>{{ $subject->name_subject }}</td>
                     <td>{{ $subject->course->name_course ?? 'No asignado' }}</td>
                     <td>
-                        <a href="{{ route('teacher.subjects.assignTaskForm', $subject->id) }}" class="btn btn-primary btn-sm">Ver más</a>
+                        <a href="{{ route('teacher.subjects.assignTaskForm', $subject->id) }}" class="btn btn-primary btn-sm">Ver má</a>
                         <a href="{{ route('teacher.subjects.attendanceForm', $subject->id) }}" class="btn btn-success btn-sm">Asistencia</a>
 
                     </td>

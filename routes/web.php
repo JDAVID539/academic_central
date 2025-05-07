@@ -14,15 +14,14 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\SubmitAssignmentController;
 
+Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
+Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
+// Rutas de estudiantes 
 Route::get('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'create'])->name('teacher.subjects.attendanceForm');
 Route::post('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'storeMassAttendance'])->name('teacher.subjects.storeAttendance');
 Route::get('/teacher/subjects/{subject}/attendance/history', [AttendanceController::class, 'attendanceHistory'])->name('teacher.subjects.attendanceHistory');
-
-
-// Rutas de estudiantes 
-Route::get('/frmestudent', [StudentController::class, 'create'])->name('frm.create');
-Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 
 
 Route::get('/frmcurso', [CourseController::class, 'create'])->name('courses.create');
@@ -115,7 +114,6 @@ Route::delete('/courses/{course}/students/{student}', [CourseController::class, 
 Route::get('/students/search', [CourseController::class, 'searchStudents'])->name('students.search');
 
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/teacher/subjects', [TeacherController::class, 'listAssignedSubjects'])->name('teacher.subjects.list');// Mostrar las materias asignadas al profesor
 });
@@ -125,15 +123,34 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/teacher/tasks/store', [TeacherController::class, 'storeTask'])->name('teacher.tasks.store');});
     Route::post('/teacher/tasks/store', [TeacherController::class, 'storeTask'])->name('teacher.tasks.store');
-});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 });
 
-//rutas para tomar 
+//rutas para accones  tareas 
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+
+//rutas para el modulo de estudiantes
+Route::get('/student/{id}/subjects', [StudentController::class, 'showSubjectsForStudent'])->name('student.subjects');
+Route::get('/student/subject/{subject}/tasks', [StudentController::class, 'showSubjectTasks'])->name('student.subject.tasks');//ruta para ver tareas del  profesor a estudiante
+
+//rurtas para enviar la tarea al profesor
+Route::post('/submit-assignment/{task}', [SubmitAssignmentController::class, 'store'])->name('submit_assignment.store');
+Route::delete('/submit-assignment/{id}', [SubmitAssignmentController::class, 'destroy'])->name('submit_assignment.destroy');
+
+//rutas para  que el profesor ve alas  entregas de laas tareas 
+Route::get('/tasks/{task}/submissions', [SubmitAssignmentController::class, 'index'])->name('submit_assignment.index');
+
+
+
+Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
 
 
 
