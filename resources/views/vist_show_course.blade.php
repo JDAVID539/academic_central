@@ -1,5 +1,7 @@
 @extends('layouts.app_modulo')
 
+@section('title', 'Ver Curso')
+
 @section('content')
 <div class="container mt-4">
     <h3>Materias del curso: {{ $course->name_course }}</h3>
@@ -66,12 +68,18 @@
         </form>
     </div>
 </div>
+
 <h4>Estudiantes inscritos</h4>
 @if($students->count())
     <ul class="list-group mb-3">
         @foreach($students as $student)
-            <li class="list-group-item">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ $student->user->name ?? 'Nombre no disponible' }}
+                <form action="{{ route('courses.removeStudent', [$course->id, $student->id]) }}" method="POST" onsubmit="return confirm('¿Está seguro de eliminar a este estudiante del curso?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
             </li>
         @endforeach
     </ul>
@@ -79,6 +87,8 @@
 @else
     <p>No hay estudiantes inscritos en este curso.</p>
 @endif
+
+
 <h4>Agregar estudiante al curso</h4>
 <form action="{{ route('courses.assignStudent') }}" method="POST">
     @csrf
@@ -96,7 +106,6 @@
 
     <button type="submit" class="btn btn-primary">Añadir Estudiante</button>
 </form>
-
 
 
 @endsection

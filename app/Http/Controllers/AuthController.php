@@ -31,7 +31,7 @@ class AuthController
                 $request->session()->put('user_type', 'school');
                 
                 // Redirigir al panel del colegio
-                return redirect()->route('users.index')->with('success', 'Bienvenido al panel del colegio.');
+                return redirect()->route('colegio.dashboard')->with('success', 'Bienvenido al panel del colegio.');
             } else {
                 return redirect()->back()->withErrors(['email' => 'Credenciales incorrectas para el colegio.']);
             }

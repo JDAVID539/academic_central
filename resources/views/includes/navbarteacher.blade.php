@@ -26,16 +26,17 @@
      <div class="sidebar" data-color="dark" data-background-color="dark" data-image="../assets/img/sidebar-1.jpg">
       
       <div class="logo">
-        <a href=" class="simple-text logo-mini">
+        <a href="{{route('teacher.dashboard')}}" class="simple-text logo-mini">
           CT
-        </a> <a href="" class="simple-text logo-normal">
+        </a> <a href="{{route('teacher.dashboard')}}" class="simple-text logo-normal">
           academic_central
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="desative">
-            <a href="./dashboard.html">
+          </li>
+          <li>
+            <a href="{{route('teacher.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
               <p>inicio</p>
             </a>
@@ -60,9 +61,9 @@
           </li>
           
           <li>
-            <a href="{{route('list_course_teacher')}}">
+            <a href="{{route('teacher.subjects.list')}}">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>cursos</p>
+              <p>materias</p>
             </a>
           </li>
           

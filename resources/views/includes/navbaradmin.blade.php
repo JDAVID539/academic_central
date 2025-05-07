@@ -36,7 +36,7 @@
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li class="desative ">
-            <a href="{{route('school.dashboard')}}">
+            <a href="{{route('colegio.dashboard')}}">
               <i class="now-ui-icons design_app"></i>
               <p>inicio</p>
             </a>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Home - Academic Central')
 @section('content')
 <center>
     <section id="home-academic-central">
@@ -14,9 +14,9 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <h1>Tu Plataforma Integral de Aprendizaje con Academic Central</h1>
-                <p>Academic Central te ofrece las herramientas que necesitas para una gestión académica eficiente y un aprendizaje enriquecedor.</p>
-                <a href="/caracteristicas" class="button">Descubre más</a>
+                <h1>Bienvenido a Academic Central</h1>
+                <p>La plataforma que transforma la gestión académica y el aprendizaje en tu institución.</p>
+    
             </div>
         </div>
     </section>
@@ -72,6 +72,26 @@
 
 @section('styles')
 <style>
+    body {}
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #84fab0, #8fd3f4);
+        background-size: 400% 400%;
+        animation: backgroundMove 15s ease infinite;
+    }
+
+    @keyframes backgroundMove {}
+        0% {}
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
     .hero-slider {
         position: relative;
         overflow: hidden;
@@ -79,7 +99,7 @@
         height: 646px; /* Mantén la altura */
     }
 
-    .slides {
+    .slides {}
         position: relative;
         width: 100%;
         height: 100%;
@@ -149,26 +169,6 @@
 
         function changeSlide(direction) {
             currentIndex += direction;
-            if (currentIndex < 0) {
-                currentIndex = slideImages.length - 1;
-            } else if (currentIndex >= slideImages.length) {
-                currentIndex = 0;
-            }
-            showSlide(currentIndex);
-        }
-
-        // Initial slide
-        showSlide(currentIndex);
-
-        // Event listeners para los botones
-        if (prevBtn) {
-            prevBtn.onclick = function() {
-                changeSlide(-1);
-            };
-        }
-
-        if (nextBtn) {
-            nextBtn.onclick = function() {
                 changeSlide(1);
             };
         }

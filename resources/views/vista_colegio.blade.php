@@ -1,4 +1,4 @@
-@extends('layouts.app_moduloteacher')
+@extends('layouts.app_modulo') <!-- Extiende el layout principal de la aplicación -->
 
 @section('title', 'Dashboard') <!-- Título dinámico para la página -->
 
@@ -9,7 +9,7 @@
     <br>
     <br>
     
-    <h1>hola bienvenido usario profesor</h1>
+    <h1>hola bienvenido usario colegio</h1>
      
     
 </script>

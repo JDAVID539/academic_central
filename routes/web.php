@@ -12,6 +12,7 @@ use App\Http\Controllers\OrmController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
@@ -37,10 +38,14 @@ Route::get('/admin', function () {
     return view('vista_admin');})->name('admin');
 
 Route::get('/user', function () {
-    return view('vista_colegio');})->name('teacher.dashboard');
+    return view('vista_colegio');})->name('colegio.dashboard');
 
 Route::get('/estudiante', function () {
     return view('vista_estudiante');})->name('student.dashboard');
+
+    Route::get('/profesor', function () {
+        return view('vista_profesores');})->name('teacher.dashboard');
+    
 
     
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
@@ -100,5 +105,15 @@ Route::post('/subject/store', [SubjectController::class, 'store'])->name('frm_su
 
 Route::post('/courses/assign-student', [CourseController::class, 'assignStudent'])->name('courses.assignStudent');
 
-Route::get('/list_course_teacher', [CourseController::class, 'listTeacherCourses'])->name('list_course_teacher');
+
+
+Route::delete('/courses/{course}/students/{student}', [CourseController::class, 'removeStudent'])->name('courses.removeStudent');
+Route::get('/students/search', [CourseController::class, 'searchStudents'])->name('students.search');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/teacher/subjects', [TeacherController::class, 'listAssignedSubjects'])->name('teacher.subjects.list');// Mostrar las materias asignadas al profesor
+});
+
 

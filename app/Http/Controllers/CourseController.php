@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\Student;
 
 class CourseController extends Controller
 {
@@ -176,8 +177,36 @@ public function listTeacherCourses()
 {
     $teacher_id = session('teacher_id'); // o Auth::user()->teacher->id si usas autenticación
     $courses = Course::where('teacher_id', $teacher_id)->get();
-    return view('vist_lis_course_teacher', compact('courses'));
+    return view('vist_lis_materias_teacher', compact('courses'));
+}
+
+public function removeStudent($courseId, $studentId)
+{
+    $student = Student::findOrFail($studentId);
+    $student->course_id = null;
+    $student->save();
+
+    return redirect()->back()->with('success', 'Estudiante eliminado del curso correctamente.');
+}
+
+public function searchStudents(Request $request)
+{
+    $term = $request->input('term');
+
+    $students = Student::with('user')
+        ->where('school_id', session('school_id'))
+        ->where(function($query) use ($term) {
+            $query->whereHas('user', function($q) use ($term) {
+                $q->where('name', 'like', "%$term%")
+                  ->orWhere('identification_number', 'like', "%$term%");
+            });
+        })
+        ->get();
+
+    return response()->json($students);
 }
 
 
+
 }
+
