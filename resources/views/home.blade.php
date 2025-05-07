@@ -2,16 +2,19 @@
 @section('title', 'Home - Academic Central')
 @section('content')
 <center>
-    <section id="home-academic-central">
-        <div class="hero-slider">
+    <!-- Slider de imágenes -->
+    <section id="image-slider">
+        <div class="slider-container">
             <div class="slides">
                 <div class="slide active" style="background-image: url('https://bogota.gov.co/sites/default/files/styles/1050px/public/2022-11/educacion-67.jpg');"></div>
                 <div class="slide" style="background-image: url('https://cooperativa.cl/noticias/site/artic/20230509/imag/foto_0000000120230509155008.jpg');"></div>
                 <div class="slide" style="background-image: url('https://cdn.eldestapeweb.com/eldestape/032025/1742983035538.jpg?cw=1500&ch=843');"></div>
             </div>
-            <button class="slider-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-            <button class="slider-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            <button class="slider-btn prev" aria-label="Imagen anterior">&lt;</button>
+            <button class="slider-btn next" aria-label="Imagen siguiente">&gt;</button>
         </div>
+    </section>
+    
         <div class="container">
             <div class="hero-content">
                 <h1>Bienvenido a Academic Central</h1>
@@ -19,7 +22,7 @@
     
             </div>
         </div>
-    </section>
+    
     <div class="highlights">
         <div class="container">
         <div class="row">
@@ -62,16 +65,19 @@
                 <a href="/acerca-de" class="button secondary">Más sobre Academic Central</a>
                 </div>
                 <div class="col-md-6">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" width="250" height="60" class="d-inline-block align-text-top">
+                    <img src="{{ asset('public/images/fb31487f2295170415690e4c872e8455_high.webp') }}" alt="Logo" width="250" height="60" class="d-inline-block align-text-top">
                 </div>
             </div>
             </div>
         </div>
 </center>
 @endsection
+<!-- filepath: c:\xampp\htdocs\academic_central\resources\views\home.blade.php -->
+
 
 @section('styles')
 <style>
+<<<<<<< HEAD
     body {}
         margin: 0;
         padding: 0;
@@ -93,10 +99,15 @@
     }
 
     .hero-slider {
+=======
+    /* Estilos del slider */
+    .slider-container {
+>>>>>>> 777cb0ea4b56086652e88973270f11bd143ec7fb
         position: relative;
+        max-width: 800px;
+        margin: 20px auto;
         overflow: hidden;
-        margin-top: 0; /* Ajusta según la altura de tu header en el nuevo layout */
-        height: 646px; /* Mantén la altura */
+        height: 400px;
     }
 
     .slides {}
@@ -126,27 +137,25 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: none;
+        background: rgba(0, 0, 0, 0.5);
         border: none;
         color: white;
-        font-size: 2rem;
+        font-size: 1.5rem;
         cursor: pointer;
         padding: 10px;
-        opacity: 0.7;
-        transition: opacity 0.3s ease-in-out;
         z-index: 10;
     }
 
-    .slider-btn:hover {
-        opacity: 1;
-    }
-
-    .prev {
+    .slider-btn.prev {
         left: 10px;
     }
 
-    .next {
+    .slider-btn.next {
         right: 10px;
+    }
+
+    .slider-btn:hover {
+        background: rgba(0, 0, 0, 0.8);
     }
 </style>
 @endsection
@@ -154,24 +163,46 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelector('.slides');
-        const slideImages = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.slider-btn.prev');
+        const nextBtn = document.querySelector('.slider-btn.next');
         let currentIndex = 0;
 
         function showSlide(index) {
-            slideImages.forEach((slide, i) => {
+            slides.forEach((slide, i) => {
                 slide.classList.remove('active');
             });
-            slideImages[index].classList.add('active');
+            slides[index].classList.add('active');
         }
 
         function changeSlide(direction) {
             currentIndex += direction;
+<<<<<<< HEAD
                 changeSlide(1);
             };
         }
+=======
+            if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+            } else if (currentIndex >= slides.length) {
+                currentIndex = 0;
+            }
+            showSlide(currentIndex);
+        }
+
+        // Mostrar la primera imagen al cargar
+        showSlide(currentIndex);
+
+        // Eventos para los botones
+        prevBtn.addEventListener('click', function() {
+            changeSlide(-1);
+        });
+
+        nextBtn.addEventListener('click', function() {
+            changeSlide(1);
+        });
+>>>>>>> 777cb0ea4b56086652e88973270f11bd143ec7fb
     });
 </script>
 @endsection
+

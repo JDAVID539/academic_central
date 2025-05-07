@@ -118,9 +118,9 @@ footer {
 }
 
 .margen {  
-    padding: 3px; /* Margen exterior alrededor del formulario */  
-    margin: 300px; /* Espacio entre el formulario y otros elementos */
-    border: 0px solid #ccc; /* Borde alrededor de la margen */
+    padding: 20px; /* Margen exterior alrededor del formulario */  
+    margin: 50px; /* Espacio entre el formulario y otros elementos */
+    border: 2px solid #ccc; /* Borde alrededor de la margen */
 
     background-color: #e9ecef; /* Color de fondo para la margen */ 
     border-radius: 4px; /* Bordes redondeados */  

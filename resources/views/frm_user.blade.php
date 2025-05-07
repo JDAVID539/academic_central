@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="margen">
-    <center>
+    
         <h2>Registro de Usuario</h2>
 
         @if (session('success'))
@@ -26,32 +26,19 @@
                 Nombre:
                 <br>
                 <input type="text" name="name" value="{{ old('name') }}" required>
-            </label>
-            <br><br>
-
-            <label>
+            </label>     <label>
                 Correo Electrónico:
                 <br>
                 <input type="email" name="email" value="{{ old('email') }}" required>
-            </label>
-            <br><br>
-
-            <label>
+            </label>     <label>
                 Número de Identificación:
                 <br>
                 <input type="text" name="numero_de_identificacion" value="{{ old('numero_de_identificacion') }}" required>
-            </label>
-            <br><br>
-
-            
-            <label>
+            </label>     <label>
                 Contraseña:
                 <br>
                 <input type="password" name="password" required>
-            </label>
-            <br><br>
-
-            <label>
+            </label>     <label>
                 Confirmar Contraseña:
                 <br>
                 <input type="password" name="password_confirmation" required>
@@ -71,9 +58,10 @@
                 </select>
             </label>
             <br><br>
-
-            <button type="submit">Registrar Usuario</button>
+<center>
+            <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+        </center>
         </form>
-    </center>
+    
 </div>
 @endsection
