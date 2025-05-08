@@ -161,11 +161,10 @@ Route::put('/school/update', [SchoolController::class, 'update'])->name('school.
     Route::get('/teacher/profile/edit', [TeacherController::class, 'editProfile'])->name('teacher.profile.edit');
     Route::put('/teacher/profile/update', [TeacherController::class, 'updateProfile'])->name('teacher.profile.update');
 
-Route::middleware(['auth', 'role:student'])->group(function () {
-    Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.profile');
-    Route::get('/student/profile/edit', [StudentController::class, 'editProfile'])->name('student.profile.edit');
-    Route::put('/student/profile/update', [StudentController::class, 'updateProfile'])->name('student.profile.update');
-});
+    Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('profile_student');
+    Route::get('/student/profile/edit', [StudentController::class, 'editProfile'])->name('profile_edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
 
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
 

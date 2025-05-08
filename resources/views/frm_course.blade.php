@@ -1,52 +1,59 @@
 @extends('layouts.app_modulo')
 
 @section('content')
-<br>
-<br>
-    <h2>Registrar Curso</h2>
- 
-    @if (session('success'))
-        <p style="color: green">{{ session('success') }}</p>
-    @endif
 
-    @if ($errors->any())
-        <ul style="color: red;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+<link rel="stylesheet" href="{{ asset('css/course_form.css') }}">
 
-    <form action="{{ route('courses.store') }}" method="POST">
-        @csrf
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-gold text-white">
+            <h2 class="mb-0">Registrar Curso</h2>
+        </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        <label>
-            Nombre del curso:
-            <br>
-            <input type="text" name="name_course" required>
-        </label>
-        <br><br>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <label>
-            Descripción del curso:
-            <br>
-            <textarea name="description_course" rows="4" required></textarea> 
-        </label>
-        <br><br>
-        
-        <label>
-            Profesor asignado:
-            <br>
-            <select name="teacher_id">
-                <option value="">Seleccione un profesor</option>
-                @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher->id }}">{{ $teacher->user->name }}</option>
-                @endforeach
-            </select>
-        </label>
-        <br><br>
+            <form action="{{ route('courses.store') }}" method="POST">
+                @csrf
 
-        <button type="submit">Registrar Curso</button>
-    </form>
-</body>
+                <div class="mb-3">
+                    <label for="name_course" class="form-label">Nombre del curso:</label>
+                    <input type="text" name="name_course" id="name_course" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description_course" class="form-label">Descripción del curso:</label>
+                    <textarea name="description_course" id="description_course" class="form-control" rows="4" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="teacher_id" class="form-label">Profesor asignado:</label>
+                    <select name="teacher_id" id="teacher_id" class="form-select">
+                        <option value="">Seleccione un profesor</option>
+                        @foreach ($teachers as $teacher)
+                            <option value="{{ $teacher->id }}">{{ $teacher->user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-gold">Registrar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

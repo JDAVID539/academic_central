@@ -1,0 +1,64 @@
+body {
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: #c98027; /* Dorado principal */
+    color: #fff; /* Texto blanco */
+}
+
+.bg-gold {
+    background-color: #c99627 !important; /* Fondo dorado */
+    color: #fff !important; /* Texto blanco */
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #c98827bf; /* Dorado principal */
+    box-shadow: 0 0 5px rgba(201, 144, 39, 0.5);
+}
+
+.btn-gold {
+    background-color: #c9a227; /* Dorado principal */
+    border-color: #a67c00; /* Dorado oscuro */
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff; /* Texto blanco */
+}
+
+.btn-gold:hover {
+    background-color: #a67c00; /* Dorado oscuro */
+    border-color: #8b6914; /* Más oscuro */
+}
+
+.alert {
+    font-size: 0.9rem;
+    border-radius: 10px;
+    background-color: #f0e68c; /* Dorado claro */
+    color: #8b6914; /* Texto dorado oscuro */
+    border: 1px solid #c9a227; /* Borde dorado */
+}

@@ -1,46 +1,49 @@
 @extends('layouts.app_modulo')
 
 @section('content')
-<div class="container mt-4">
-    <h2>Editar Curso</h2>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Editar Curso</h2>
+        </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-    @if (session('success'))
-        <p style="color: green">{{ session('success') }}</p>
-    @endif
+            <form action="{{ route('courses.update', $course->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-    <form action="{{ route('courses.update', $course->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+                <div class="mb-3">
+                    <label for="name_course" class="form-label">Nombre del curso:</label>
+                    <input type="text" name="name_course" id="name_course" class="form-control" value="{{ $course->name_course }}" required>
+                </div>
 
-        <label>
-            Nombre del curso:
-            <br>
-            <input type="text" name="name_course" value="{{ $course->name_course }}" required>
-        </label>
-        <br><br>
+                <div class="mb-3">
+                    <label for="description_course" class="form-label">Descripción del curso:</label>
+                    <textarea name="description_course" id="description_course" class="form-control" rows="4" required>{{ $course->description_course }}</textarea>
+                </div>
 
-        <label>
-            Descripción del curso:
-            <br>
-            <textarea name="description_course" rows="4" required>{{ $course->description_course }}</textarea> 
-        </label>
-        <br><br>
-        
-        <label>
-            Profesor asignado:
-            <br>
-            <select name="teacher_id">
-                <option value="">Seleccione un profesor</option>
-                @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher->id }}" {{ $teacher->id == $course->teacher_id ? 'selected' : '' }}>
-                        {{ $teacher->user->name }}
-                    </option>
-                @endforeach
-            </select>
-        </label>
-        <br><br>
+                <div class="mb-3">
+                    <label for="teacher_id" class="form-label">Profesor asignado:</label>
+                    <select name="teacher_id" id="teacher_id" class="form-select">
+                        <option value="">Seleccione un profesor</option>
+                        @foreach ($teachers as $teacher)
+                            <option value="{{ $teacher->id }}" {{ $teacher->id == $course->teacher_id ? 'selected' : '' }}>
+                                {{ $teacher->user->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <button type="submit">Actualizar Curso</button>
-    </form>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Actualizar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

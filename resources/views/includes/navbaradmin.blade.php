@@ -67,7 +67,7 @@
     </div>
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7b6d6d;">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle">

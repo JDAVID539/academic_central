@@ -1,4 +1,4 @@
-@extends('layouts.app_moduloteacher')
+@extends('layouts.app_moduloestudent')
 
 @section('title', 'Perfil del Estudiante')
 
@@ -20,7 +20,7 @@
       <h3>{{ Auth::user()->name }}</h3>
       <p>Teléfono: {{ $profile->phone ?? 'No disponible' }}</p>
       <p>Dirección: {{ $profile->address ?? 'No disponible' }}</p>
-      <a href="{{ route('student.profile.edit') }}" class="btn btn-primary mt-3">
+<a href="{{ route('profile_edit') }}" class="btn btn-primary mt-3">
         {{ $profile && $profile->foto ? 'Editar Perfil' : 'Agregar Foto y Editar Perfil' }}
       </a>
     </div>

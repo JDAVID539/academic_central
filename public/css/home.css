@@ -1,0 +1,11 @@
+#home-academic-central {
+    background: url('../images/home-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: black; /* Cambiar el color del texto si es necesario */
+}
+
+.highlights {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    border-radius: 10px;
+    padding: 20px;
+}

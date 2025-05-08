@@ -1,52 +1,52 @@
 @extends('layouts.app_modulo')
 
-@section('title', 'Editar Usuario')
-
 @section('content')
-<div class="container mt-4">
-    <h2>Editar usuario</h2>
-<h3>Información del Usuario</h3>
-    <form method="POST" action="{{ route('users.update', $user->id) }}">
-        @csrf
-        @method('PUT')
 
-        <div class="mb-3">
-            <label>Nombre</label>
-            <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+<link rel="stylesheet" href="{{ asset('css/course_edit.css') }}">
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Editar Curso</h2>
         </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        <div class="mb-3">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+            <form action="{{ route('courses.update', $course->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label for="name_course" class="form-label">Nombre del curso:</label>
+                    <input type="text" name="name_course" id="name_course" class="form-control" value="{{ $course->name_course }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description_course" class="form-label">Descripción del curso:</label>
+                    <textarea name="description_course" id="description_course" class="form-control" rows="4" required>{{ $course->description_course }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="teacher_id" class="form-label">Profesor asignado:</label>
+                    <select name="teacher_id" id="teacher_id" class="form-select">
+                        <option value="">Seleccione un profesor</option>
+                        @foreach ($teachers as $teacher)
+                            <option value="{{ $teacher->id }}" {{ $teacher->id == $course->teacher_id ? 'selected' : '' }}>
+                                {{ $teacher->user->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Actualizar Curso</button>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label>Número de Identificación</label>
-            <input type="text" name="numero_de_identificacion" class="form-control" value="{{ $user->numero_de_identificacion }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Rol</label>
-            <select name="rol_id" class="form-control" required>
-                @foreach ($roles as $rol)
-                    <option value="{{ $rol->id }}" {{ $rol->id == $user->rol_id ? 'selected' : '' }}>
-                        {{ $rol->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label>Nueva Contraseña (opcional)</label>
-            <input type="password" name="password" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label>Confirmar Contraseña</label>
-            <input type="password" name="password_confirmation" class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Actualizar</button>
-    </form>
+    </div>
 </div>
 @endsection

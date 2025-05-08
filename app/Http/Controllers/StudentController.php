@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -56,5 +57,44 @@ public function showSubjectTasks($subjectId)
 
     return view('student_subject_tasks', compact('subject', 'tasks'));
 }
+
+
+
+public function showProfile()
+{
+    $user = Auth::user();
+    $profile = $user->profile;
+    $school = $user->school; // Obtener la escuela asociada si existe
+    return view('profile_student', compact('user', 'profile', 'school'));
+}
+
+public function editProfile()
+{
+    $user = Auth::user();
+    $profile = $user->profile; // Obtener perfil asociado
+    return view('edit_profile_student', compact('user', 'profile'));
+}
+
+public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+        // Otros campos que quieras validar
+    ]);
+
+    $user->update($request->only(['name', 'email']));
+    $profile->update($request->only(['phone', 'address']));
+
+    return redirect()->route('profile_student')->with('success', 'Perfil actualizado correctamente.');
+}
+
+
+
 
 }

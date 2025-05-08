@@ -74,9 +74,11 @@ public function showProfile()
 
 public function edit()
 {
-    $school = School::first();
+    $schoolId = session('school_id'); // Obtener el ID del colegio desde la sesión
+    $school = School::find($schoolId);
     return view('school_edit_perfil', compact('school'));
 }
+
 
 public function update(Request $request)
 {

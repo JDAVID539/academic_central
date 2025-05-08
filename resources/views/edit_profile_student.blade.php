@@ -1,4 +1,4 @@
-@extends('layouts.app_moduloteacher')
+@extends('layouts.app_moduloestudent')
 
 @section('title', 'Editar Perfil del Estudiante')
 
@@ -15,7 +15,7 @@
           </div>
       @endif
 
-      <form action="{{ route('student.profile.update') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
 
@@ -38,6 +38,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+          <button><a href="{{ route('profile_student') }}" class="btn btn-primary w-100 ">Cancelar</button>
       </form>
     </div>
   </div>

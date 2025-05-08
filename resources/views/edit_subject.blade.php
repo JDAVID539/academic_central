@@ -5,9 +5,10 @@
     <br>
     <br> 
     <br>
-    <h2>Editar Materia</h2>
-    <form method="POST" action="{{ route('subjects.update', $subject->id) }}">
+    
+    <form method="POST" action="{{ route('subjects.update', $subject->id) }}" class="formulario">
         @csrf
+        <h2>Editar Materia</h2>
         @method('PUT')
 
         <div class="mb-3">

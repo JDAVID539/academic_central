@@ -10,6 +10,7 @@
 <div class="container mt-4">
   <div class="card mx-auto" style="max-width: 600px;">
     <div class="card-body text-center">
+      <h3>{{ $school->name_school }}</h3> <!-- Nombre del colegio arriba -->
       @if($school->photo)
         <img src="{{ asset('uploads/' . $school->photo) }}" alt="Foto del Colegio" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
       @else
@@ -17,7 +18,6 @@
           Sin Foto
         </div>
       @endif
-      <h3>{{ $school->name_school }}</h3>
       <p>{{ $school->address }}, {{ $school->city }}</p>
       <p>Email: {{ $school->email }}</p>
       <p>Teléfono: {{ $school->phone }}</p>
@@ -25,6 +25,7 @@
         {{ $school->photo ? 'Editar Perfil' : 'Agregar Foto y Editar Perfil' }}
       </a>
     </div>
+    
   </div>
 </div>
 
