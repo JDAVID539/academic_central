@@ -48,7 +48,7 @@
             </a>
           </li>
           <li>
-            <a href="{{route('user.perfil')}}">
+            <a href="{{route('teacher.profile')}}">
               <i class="now-ui-icons users_single-02"></i>
               <p>perfil de usuario </p>
             </a>

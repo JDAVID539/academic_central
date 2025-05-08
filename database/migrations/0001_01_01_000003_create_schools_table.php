@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            
+
         $table->string('name');
         $table->string('name_school'); 
         $table->string('address');
@@ -20,6 +22,7 @@ return new class extends Migration
         $table->string('email')->unique();
         $table->string('phone');
         $table->string('password')->nullable();
+        $table->string('photo')->nullable();
         $table->timestamps();
            
         });

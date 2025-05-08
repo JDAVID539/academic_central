@@ -55,6 +55,71 @@ class TeacherController extends Controller
 }
 
 
+public function showProfile()
+{
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    if (!$profile) {
+        $profile = new \App\Models\Profile();
+        $profile->user_id = $user->id;
+        $profile->save();
+    }
+
+    $teacher = $user->teacher;
+    $school = $teacher ? $teacher->school : null;
+
+    return view('teacher.profile', compact('profile', 'school'));
+}
+
+// Mostrar formulario para editar perfil
+
+public function editProfile()
+{
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    if (!$profile) {
+        $profile = new \App\Models\Profile();
+        $profile->user_id = $user->id;
+        $profile->save();
+    }
+
+    return view('teacher.edit_profile', compact('profile'));
+}
+
+// Procesar actualización del perfil
+public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    if (!$profile) {
+        $profile = new \App\Models\Profile();
+        $profile->user_id = $user->id;
+    }
+
+    $request->validate([
+        'phone' => 'nullable|string|max:15',
+        'address' => 'nullable|string|max:255',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // otros campos que quieras validar
+    ]);
+
+    $profile->phone = $request->input('phone');
+    $profile->address = $request->input('address');
+
+if ($request->hasFile('photo')) {
+    $file = $request->file('photo');
+    $filename = time() . '.' . $file->getClientOriginalExtension();
+    $file->move(public_path('uploads'), $filename);
+    $profile->foto = $filename;
+}
+
+    $profile->save();
+
+    return redirect()->route('teacher.profile.edit')->with('success', 'Perfil actualizado correctamente.');
+}
 
 
 }

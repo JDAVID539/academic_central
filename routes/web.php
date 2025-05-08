@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+
+
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
@@ -148,7 +151,21 @@ Route::delete('/submit-assignment/{id}', [SubmitAssignmentController::class, 'de
 //rutas para  que el profesor ve alas  entregas de laas tareas 
 Route::get('/tasks/{task}/submissions', [SubmitAssignmentController::class, 'index'])->name('submit_assignment.index');
 
+//ruta para colegio ver perfil del colegio
+Route::get('/profile/colegio', [SchoolController::class, 'showProfile'])->name('profile.colegio');
+Route::get('/school/edit', [SchoolController::class, 'edit'])->name('school.edit');
+Route::put('/school/update', [SchoolController::class, 'update'])->name('school.update');
 
+// Ruta para perfil  teacher Route::middleware(['auth', 'role:teacher'])->group(function () {
+    Route::get('/teacher/profile', [TeacherController::class, 'showProfile'])->name('teacher.profile');
+    Route::get('/teacher/profile/edit', [TeacherController::class, 'editProfile'])->name('teacher.profile.edit');
+    Route::put('/teacher/profile/update', [TeacherController::class, 'updateProfile'])->name('teacher.profile.update');
+
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/student/profile', [StudentController::class, 'showProfile'])->name('student.profile');
+    Route::get('/student/profile/edit', [StudentController::class, 'editProfile'])->name('student.profile.edit');
+    Route::put('/student/profile/update', [StudentController::class, 'updateProfile'])->name('student.profile.update');
+});
 
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
 

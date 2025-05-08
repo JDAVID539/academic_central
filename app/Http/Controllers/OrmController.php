@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\user; // Import the user model
-use App\Models\role; // Import the role model
+use App\Models\Role; // Import the role model
 use App\Models\School;
 use App\Models\School_Grade;
 use App\Models\Student;

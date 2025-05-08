@@ -18,6 +18,9 @@ class School extends Model
         'email',
         'phone',
         'password',
+        'photo'
+
+
     ];
     
 

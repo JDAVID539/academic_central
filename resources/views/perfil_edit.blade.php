@@ -30,7 +30,7 @@
 
         <div class="form-group">
             <label>Rol:</label>
-            <input type="text" name="role" class="form-control" value="{{ $user->role }}">
+            <input type="text" name="role" class="form-control" value="{{ $user->role->name ?? '' }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
