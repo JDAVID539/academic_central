@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\School;
 use App\Models\Teacher; // 
 use App\Models\Student; //
+use App\Models\Classroom; //
+use App\Models\Course; //
 
 class UserController extends Controller
 {
@@ -97,12 +99,12 @@ if ($rolestudiante && $user->rol_id == $rolestudiante->id) {
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $user->load('role');
-        $roles = Role::all();
-
-        return view('frm_user_edit', compact('user', 'roles'));
+        $course = Course::findOrFail($id);
+        $teachers = Teacher::all(); // o como obtengas los profesores
+        return view('frm_user_edit', compact('course', 'teachers'));
     }
+    
+    
 
     public function update(Request $request, $id)
     {

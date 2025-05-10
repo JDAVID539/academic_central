@@ -52,12 +52,6 @@
               <p>perfil de usuario </p>
             </a>
           </li>
-          <li>
-            <a href="./notifications.html">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
           
           <li>
 <a href="{{route('student.subjects', ['id' => auth()->user()->student->id])}}">
@@ -65,12 +59,7 @@
               <p>materias</p>
             </a>
           </li>
-          <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>Tareas</p>
-            </a>
-          </li>
+          
           
         </ul>
       </div>

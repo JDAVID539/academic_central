@@ -9,9 +9,7 @@
             <div class="carousel-item active">
                 <img src="https://bogota.gov.co/sites/default/files/styles/1050px/public/2022-11/educacion-67.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Imagen 1">
             </div>
-            <div class="carousel-item">
-                <img src="https://cooperativa.cl/noticias/site/artic/20230509/imag/foto_0000000120230509155008.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Imagen 2">
-            </div>
+           
             <div class="carousel-item">
                 <img src="https://img-aws.ehowcdn.com/750x500p/photos.demandstudios.com/getty/article/28/17/sb10069478a-001.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Imagen 3">
             </div>

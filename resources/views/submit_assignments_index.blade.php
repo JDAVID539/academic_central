@@ -14,10 +14,10 @@
                     <th>Fecha de entrega</th>
                     <th>Archivo</th>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($submissions as $submission)
+            </thead>ission)
                     <tr>
+            <tbody>
+                @foreach($submissions as $subm
                         <td>{{ $submission->student->user->name ?? 'Nombre no disponible' }}</td>
                         <td>{{ \Carbon\Carbon::parse($submission->delivery_date)->format('d/m/Y H:i') }}</td>
                         <td>
