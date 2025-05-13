@@ -11,7 +11,7 @@ class SchoolController extends Controller
 {
     public function create()
     {
-        return view('frm_school');
+        return view('administrador.frm_school');
     }
 
     public function store(Request $request)

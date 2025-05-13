@@ -73,7 +73,7 @@ class CourseController extends Controller
 
         $courses = $query->get();
 
-        return view('vist_list_courses', compact('courses'));
+        return view('colegio.vist_list_courses', compact('courses'));
     }
 
     // Editar curso

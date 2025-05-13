@@ -73,7 +73,7 @@ class SubjectController extends Controller
         $teachers = Teacher::where('school_id', $school_id)->get();
         $courses = Course::where('school_id', $school_id)->get();
 
-        return view('edit_subject', compact('subject', 'teachers', 'courses'));
+        return view('colegio.edit_subject', compact('subject', 'teachers', 'courses'));
     }
 
     public function update(Request $request, $id)
