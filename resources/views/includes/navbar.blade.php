@@ -21,10 +21,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Iniciar sesión</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('colegiio.create') }}">Registrar colegio</a>
-        </li>
+        </li>     
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('contact.create') }}">contactanos</a>
         </li>

@@ -49,7 +49,7 @@
                         <td>{{ $user->numero_de_identificacion }}</td>
                         <td>{{ $user->role->name ?? 'Sin rol' }}</td>
                         <td class="text-center">
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary me-1">✏️ </a>
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary me-1">✏️editar </a>
 
                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                 @csrf

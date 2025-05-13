@@ -13,12 +13,13 @@ use App\Models\Student; //
 use App\Models\Classroom; //
 use App\Models\Course; //
 
-class UserController extends Controller
+class 
+UserController extends Controller
 {
     public function create()
     {
         $roles = Role::all();
-        return view('frm_user', compact('roles'));
+        return view('colegio.frm_user', compact('roles'));
     }
          
     public function store(Request $request)
@@ -94,14 +95,14 @@ if ($rolestudiante && $user->rol_id == $rolestudiante->id) {
 
         $users = $query->get();
 
-        return view('view_list_users', compact('users', 'roles'));
+        return view('colegio.view_list_users', compact('users', 'roles'));
     }
 
     public function edit($id)
     {
         $course = Course::findOrFail($id);
         $teachers = Teacher::all(); // o como obtengas los profesores
-        return view('frm_user_edit', compact('course', 'teachers'));
+        return view('colegio.frm_user_edit', compact('course', 'teachers'));
     }
     
     

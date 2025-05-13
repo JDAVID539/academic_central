@@ -23,7 +23,7 @@ class AttendanceController extends Controller
             ->where('attendance_date', $today)
             ->get();
     
-        return view('frm_attendence', compact('subject', 'students', 'attendancesToday'));
+        return view('teacher.frm_attendence', compact('subject', 'students', 'attendancesToday'));
     }
     
 
@@ -66,7 +66,7 @@ public function attendanceHistory(Request $request, $subjectId)
         $filteredStudent = $students->where('id', $studentId)->first();
 
         // Pasar solo las asistencias filtradas y el estudiante filtrado
-        return view('attendance_history', compact('subject', 'students', 'attendances', 'filteredStudent'));
+        return view('teacher.attendance_history', compact('subject', 'students', 'attendances', 'filteredStudent'));
     } else {
         // Obtener todas las asistencias agrupadas por fecha
         $attendancesByDate = Attendance::whereIn('student_id', $students->pluck('id'))
@@ -75,7 +75,7 @@ public function attendanceHistory(Request $request, $subjectId)
             ->groupBy('attendance_date');
 
         // Pasar null para filteredStudent para evitar error en la vista
-        return view('attendance_history', compact('subject', 'students', 'attendancesByDate', 'filteredStudent'));
+        return view('teacher.attendance_history', compact('subject', 'students', 'attendancesByDate', 'filteredStudent'));
     }
 }
 

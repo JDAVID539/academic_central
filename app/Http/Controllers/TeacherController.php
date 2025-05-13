@@ -23,14 +23,14 @@ class TeacherController extends Controller
     
         $subjects = \App\Models\Subject::where('teacher_id', $teacher->id)->get();
     
-        return view('vist_lis_materias_teacher', compact('subjects'));
+        return view('teacher.vist_lis_materias_teacher', compact('subjects'));
     }
     
     public function showAssignTaskForm($subjectId)
     {
         $subject = Subject::findOrFail($subjectId);
         $tasks = $subject->tasks; // Obtener tareas relacionadas
-        return view('assign_task', compact('subject', 'tasks'));
+        return view('teacher.assign_task', compact('subject', 'tasks'));
     }
     
     public function storeTask(Request $request)

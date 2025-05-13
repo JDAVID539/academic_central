@@ -25,6 +25,12 @@ return new class extends Migration
         $table->string('photo')->nullable();
         $table->timestamps();
            
+         $table->unsignedBigInteger('super_administrador_id')->nullable();
+            $table->foreign('super_administrador_id')
+            ->references('id')
+            ->on('super_administradors')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

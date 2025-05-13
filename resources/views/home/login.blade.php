@@ -50,6 +50,8 @@
                     <option value="user_profesor">Profesor</option>
                     <option value="user_moderador">Moderador</option>
                     <option value="school">Colegio</option>
+                    <option value="super_administrador">Super Administrador</option>
+
                 </select>
             </div>
 

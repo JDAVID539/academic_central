@@ -22,7 +22,7 @@ class CourseController extends Controller
     // Cargar profesores del colegio actual con su usuario
     $teachers = Teacher::with('user')->where('school_id', $school_id)->get();
 
-    return view('frm_course', compact('teachers'));
+    return view('colegio.frm_course', compact('teachers'));
 }
 
     // Guardar nuevo curso
@@ -92,7 +92,7 @@ public function edit($id)
     // Cargar profesores del colegio actual con su usuario
     $teachers = Teacher::with('user')->where('school_id', $school_id)->get();
 
-    return view('frm_course_edit', compact('course', 'teachers'));
+    return view('colegio.frm_course_edit', compact('course', 'teachers'));
 }
 
 
@@ -157,7 +157,7 @@ public function showSubjects($id)
 
     $students = $course->students()->paginate(6);
 
-    return view('vist_show_course', compact('course', 'teachers', 'subjects', 'students', 'available_students'));
+    return view('colegio.vist_show_course', compact('course', 'teachers', 'subjects', 'students', 'available_students'));
 }
 
 public function assignStudent(Request $request)

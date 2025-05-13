@@ -18,10 +18,11 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SubmitAssignmentController;
+use App\Models\super_administrador;
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
-// Rutas de estudiantes 
+// Rutas de asistencia
 Route::get('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'create'])->name('teacher.subjects.attendanceForm');
 Route::post('/teacher/subjects/{subject}/attendance', [AttendanceController::class, 'storeMassAttendance'])->name('teacher.subjects.storeAttendance');
 Route::get('/teacher/subjects/{subject}/attendance/history', [AttendanceController::class, 'attendanceHistory'])->name('teacher.subjects.attendanceHistory');
@@ -36,21 +37,18 @@ Route::post('/courses', [CourseController::class, 'store'])->name('courses.store
 
 Route::get('/consultas', [OrmController::class, 'consultas']);
 
-Route::get('/frmcontacto', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 
 //vistas de roles
 Route::get('/admin', function () {
     return view('vista_admin');})->name('admin');
 
-Route::get('/user', function () {
-    return view('vista_colegio');})->name('colegio.dashboard');
+
 
 Route::get('/estudiante', function () {
     return view('vista_estudiante');})->name('student.dashboard');
 
-    Route::get('/profesor', function () {
-        return view('vista_profesores');})->name('teacher.dashboard');
+    
     
 
     
@@ -62,20 +60,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 //vistas para home  y sus seciones
-Route::get('/', function () { return view('home');})->name('home');
+Route::get('/', function () { return view('home.home');})->name('home');//rutas que muestra al entrar
+    route::get('/login', function () {return view('home.login');})->name('login');//ruta que muestra el el formulario de login
+     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');//ruta que que autentica la los datos enviados del home 
 
-//rutas para inicio de seccion  get y post
-    route::get('/login', function () {return view('login');})->name('login');
 
-     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/frmcontacto', [ContactController::class, 'create'])->name('contact.create');//ruta que muestra el formulario de contactanos 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');//envvia los datos  a la bsdt de contactanos
 
-//rutas para el formulario de registro de colegio get y post
-Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');
-Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');
 
-//rutas paara el modulo administrador
+//rutas paara el modulo colegio-administrador  y sus secciones
+Route::get('/user', function () {return view('colegio.vista_colegio');})->name('colegio.dashboard');//vista que muetra al iniciar seccion
 Route::get('/users', [UserController::class, 'index'])->name('users.index');// ruta para ver los usarios registrados y filtrar, eliminar editar y añadir     
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');// ediatr datos de usario
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');// ediatr datos de usuario
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');// actualizar usarios registrados
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy'); //eliminar  usuarios registrados
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // cerrar secion
@@ -83,9 +80,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // ce
 Route::get('/frmuser', [UserController::class, 'create'])->name('users.create');//para ver el formulario de registro de usario
 Route::post('/users', [UserController::class, 'store'])->name('users.store');//para enviar el formulario 
 
-//rutas para el modulo de eestudiantes
-Route::get('/estudiante', function () {return view('vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
+//ruta para colegio ver perfil del colegio
+Route::get('/profile/colegio', [SchoolController::class, 'showProfile'])->name('profile.colegio');
+Route::get('/school/edit', [SchoolController::class, 'edit'])->name('school.edit');
+Route::put('/school/update', [SchoolController::class, 'update'])->name('school.update');
+//cursos de colegio
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');//mostrar lista de loscursos donde puede agregar  eliminar y editar   
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');//mostrar formulario para editar un curso
+Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');//actualizar datos de un curso
+Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');//eliminar un curso
+
+
+
+
+//rutas para el modulo usuario- estudiante
+Route::get('/estudiante', function () {return view('estudiante.vista_estudiante');})->name('student.dashboard');//vista que manda  al iniicio de sesion de estudiante 
 Route::get('/user/perfil', [ProfileController::class, 'show'])->name('user.perfil');
+
 
 
 
@@ -151,10 +162,7 @@ Route::delete('/submit-assignment/{id}', [SubmitAssignmentController::class, 'de
 //rutas para  que el profesor ve alas  entregas de laas tareas 
 Route::get('/tasks/{task}/submissions', [SubmitAssignmentController::class, 'index'])->name('submit_assignment.index');
 
-//ruta para colegio ver perfil del colegio
-Route::get('/profile/colegio', [SchoolController::class, 'showProfile'])->name('profile.colegio');
-Route::get('/school/edit', [SchoolController::class, 'edit'])->name('school.edit');
-Route::put('/school/update', [SchoolController::class, 'update'])->name('school.update');
+
 
 // Ruta para perfil  teacher Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher/profile', [TeacherController::class, 'showProfile'])->name('teacher.profile');
@@ -167,6 +175,30 @@ Route::put('/school/update', [SchoolController::class, 'update'])->name('school.
 
 
 Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboard');
+
+
+use App\Http\Controllers\SuperAdministradorController;
+
+Route::get('/spadministrador', [SuperAdministradorController::class, 'index'])->name('vist_superadministrador');
+Route::get('/listado-colegios', [SuperAdministradorController::class, 'listSchools'])->name('listado.colegios');
+
+Route::get('/colegio/{id}/editar', [SuperAdministradorController::class, 'editSchool'])->name('colegio.editar');
+Route::put('/colegio/{id}', [SuperAdministradorController::class, 'updateSchool'])->name('colegio.actualizar');
+Route::delete('/colegio/{id}', [SuperAdministradorController::class, 'deleteSchool'])->name('colegio.eliminar');
+
+Route::get('/colegio/{id}/detalle', [SuperAdministradorController::class, 'showSchoolDetail'])->name('school.detail');
+Route::get('/frm_colegio', [SchoolController::class, 'create'])->name('colegiio.create');//ruta  que muestra el formulario de registar el formulario
+Route::post('/colegio', [SchoolController::class, 'store'])->name('colegio.store');//ruta que eenvia los datos del formulario colegio a la baase de datos
+
+Route::get('/superadmin/profile', [SuperAdministradorController::class, 'profileSuperAdmin'])->name('superadmin.profile');
+
+Route::get('/superadmin/profile/edit', [SuperAdministradorController::class, 'editProfile'])->name('superadmin.editProfile');
+Route::put('/superadmin/profile/update', [SuperAdministradorController::class, 'updateProfile'])->name('superadmin.updateProfile');
+
+
+//rutas para el modulo profesores
+Route::get('/profesor', function () {return view('teacher.vista_profesores');})->name('teacher.dashboard');
+
 
 
 

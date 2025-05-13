@@ -40,7 +40,7 @@ class SchoolController extends Controller
         
 
         // Redirigir a la vista de éxito o donde desees
-        return redirect()->route('home')->with('success', 'Escuela creada con éxito.');
+        return redirect()->route('colegiio.create')->with('success', 'Escuela creada con éxito.');
     }
     public function index()
 {
@@ -61,14 +61,14 @@ class SchoolController extends Controller
     })->get();
 
     // Retorna la vista con los usuarios clasificados
-    return view('vista_colegio', compact('students', 'teachers', 'admins'));
+    return view('colegio.vista_colegio', compact('students', 'teachers', 'admins'));
 }
 
 public function showProfile()
 {
     $schoolId = session('school_id'); // o como guardes el id del colegio en sesión
     $school = School::find($schoolId);
-    return view('profile_colegio', compact('school'));
+    return view('colegio.profile_colegio', compact('school'));
     
 }
 
@@ -76,7 +76,7 @@ public function edit()
 {
     $schoolId = session('school_id'); // Obtener el ID del colegio desde la sesión
     $school = School::find($schoolId);
-    return view('school_edit_perfil', compact('school'));
+    return view('colegio.school_edit_perfil', compact('school'));
 }
 
 

@@ -14,15 +14,14 @@
                     <th>Fecha de entrega</th>
                     <th>Archivo</th>
                 </tr>
-            </thead>ission)
-                    <tr>
+            </thead>
             <tbody>
-                @foreach($submissions as $subm
+                @foreach($submissions as $submission)
+                    <tr>
                         <td>{{ $submission->student->user->name ?? 'Nombre no disponible' }}</td>
                         <td>{{ \Carbon\Carbon::parse($submission->delivery_date)->format('d/m/Y H:i') }}</td>
                         <td>
                             <a href="{{ asset('storage/' . $submission->file_path) }}" target="_blank">Ver archivo</a>
-
                         </td>
                     </tr>
                 @endforeach
@@ -32,3 +31,4 @@
         <p>No hay entregas para esta tarea aún.</p>
     @endif
 @endsection
+

@@ -19,7 +19,7 @@ class SubmitAssignmentController extends Controller
     $task = Task::with('submit_assignment.student.user')->findOrFail($taskId);
     $submissions = $task->submit_assignment;
 
-    return view('submit_assignments_index', compact('task', 'submissions'));
+    return view('teacher.submit_assignments_index', compact('task', 'submissions'));
 }
 
     

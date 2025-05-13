@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\School;
+use App\Models\super_administrador;
 
 class AuthController
 {
@@ -39,6 +40,21 @@ class AuthController
 
         // Verificar las credenciales del usuario regular
         $credentials = $request->only('email', 'password');
+
+        if ($request->type === 'super_administrador') {
+            $superAdmin = super_administrador::where('email', $request->email)->first();
+            if ($superAdmin && Hash::check($request->password, $superAdmin->password)) {
+                // Guardar información en sesión
+                $request->session()->put('super_administrador_id', $superAdmin->id);
+                $request->session()->put('super_administrador_name', $superAdmin->name);
+                $request->session()->put('user_type', 'super_administrador');
+
+                // Redirigir a la vista del super administrador
+                return redirect()->route('vist_superadministrador')->with('success', 'Bienvenido al panel del super administrador.');
+            } else {
+                return redirect()->back()->withErrors(['email' => 'Credenciales incorrectas para super administrador.']);
+            }
+        }
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();

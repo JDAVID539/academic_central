@@ -38,4 +38,10 @@ class School extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    //relacion uno a muchos con super_administrador
+    public function super_administrador()
+    {
+        return $this->hasMany(super_administrador::class);
+    }
 }
