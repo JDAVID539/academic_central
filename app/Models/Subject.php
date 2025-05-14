@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use HasFactory;
 class Subject extends Model
 {
+      
     protected $fillable = [
+        
         'name_subject',
         'course_id',
         'teacher_id',

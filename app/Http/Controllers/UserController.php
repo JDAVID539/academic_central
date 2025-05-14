@@ -149,6 +149,37 @@ if ($rolestudiante && $user->rol_id == $rolestudiante->id) {
     
         return view('user_details', compact('user'));
     }
+ 
 
+
+public function students()
+{
+    // Filtrar usuarios con el rol de estudiante
+    $students = User::whereHas('role', function ($query) {
+        $query->where('name', 'estudiante');
+    })->get();
+
+    return view('users.vista_estudiante', compact('students'));
+}
+
+
+public function teachers()
+{
+    $teachers = User::whereHas('role', function ($query) {
+        $query->where('name', 'profesor');
+    })->get();
+
+    return view('users.teachers', compact('teachers'));
+}
+
+public function admins()
+{
+    // Filtrar usuarios con el rol de administrador
+    $admins = User::whereHas('role', function ($query) {
+        $query->where('name', 'administrador');
+    })->get();
+
+    return view('users.admins', compact('admins'));
+}
  
 }

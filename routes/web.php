@@ -70,7 +70,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 
 //rutas paara el modulo colegio-administrador  y sus secciones
-Route::get('/user', function () {return view('colegio.vista_colegio');})->name('colegio.dashboard');//vista que muetra al iniciar seccion
+Route::get('/user', [SchoolController::class, 'vistaColegio'])->name('colegio.dashboard');
 Route::get('/users', [UserController::class, 'index'])->name('users.index');// ruta para ver los usarios registrados y filtrar, eliminar editar y añadir     
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');// ediatr datos de usuario
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');// actualizar usarios registrados
@@ -202,3 +202,23 @@ Route::get('/profesor', function () {return view('teacher.vista_profesores');})-
 
 
 
+// filepath: c:\xampp\htdocs\academic_central\routes\web.php
+
+
+Route::get('/users/students', [UserController::class, 'students'])->name('users.students');
+
+Route::get('/users/teachers', [UserController::class, 'teachers'])->name('users.teachers');
+Route::get('/users/admins', [UserController::class, 'admins'])->name('users.admins');
+
+
+Route::get('/teachers/{id}/courses', [TeacherController::class, 'courses'])->name('teacher.courses');
+
+
+
+
+Route::get('/teacher/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
+
+Route::get('/teacher/course/{id}/details', [TeacherController::class, 'courseDetails'])->name('teacher.course.details');
+
+
+Route::get('/student/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');

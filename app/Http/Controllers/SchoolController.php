@@ -42,6 +42,41 @@ class SchoolController extends Controller
         // Redirigir a la vista de éxito o donde desees
         return redirect()->route('colegiio.create')->with('success', 'Escuela creada con éxito.');
     }
+
+
+public function vistaColegio()
+{
+    // Obtener el id del colegio actual desde la sesión
+    $schoolId = session('school_id');
+
+    // Obtener los ids de los roles
+    $rolEstudiante = \App\Models\Role::where('name', 'estudiante')->first();
+    $rolProfesor = \App\Models\Role::where('name', 'profesor')->first();
+    $rolAdministrador = \App\Models\Role::where('name', 'administrador')->first();
+
+    // Contar total de usuarios del colegio
+    $totalUsuarios = \App\Models\User::where('school_id', $schoolId)->count();
+
+    // Contar estudiantes del colegio
+    $totalEstudiantes = $rolEstudiante
+        ? \App\Models\User::where('school_id', $schoolId)->where('rol_id', $rolEstudiante->id)->count()
+        : 0;
+
+    // Contar profesores del colegio
+    $totalProfesores = $rolProfesor
+        ? \App\Models\User::where('school_id', $schoolId)->where('rol_id', $rolProfesor->id)->count()
+        : 0;
+
+    // Contar administradores del colegio
+    $totalAdministradores = $rolAdministrador
+        ? \App\Models\User::where('school_id', $schoolId)->where('rol_id', $rolAdministrador->id)->count()
+        : 0;
+
+    // Retornar la vista con los totales
+    return view('colegio.vista_colegio', compact('totalUsuarios', 'totalEstudiantes', 'totalProfesores', 'totalAdministradores'));
+}
+
+
     public function index()
 {
     $students = User::where('role', 'estudiante')->get();
@@ -111,6 +146,7 @@ public function update(Request $request)
 
     return redirect()->route('school.edit')->with('success', 'Perfil actualizado correctamente.');
 }
+
 
 
 

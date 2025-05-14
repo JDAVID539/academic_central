@@ -8,7 +8,10 @@ use App\Models\School;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Profile;
+use App\Models\Course; // Asegúrate de importar el modelo Course
+use App\Models\Role;
 class TeacherController extends Controller
 {
     
@@ -119,6 +122,34 @@ if ($request->hasFile('photo')) {
     $profile->save();
 
     return redirect()->route('teacher.profile.edit')->with('success', 'Perfil actualizado correctamente.');
+}
+
+public function courses($id)
+{
+    // Encuentra al profesor por su ID
+    $teacher = User::findOrFail($id);
+
+    // Obtén los cursos asignados al profesor (ajusta según tu modelo)
+    $courses = $teacher->courses; // Asegúrate de tener una relación 'courses' en el modelo User
+
+    // Retorna una vista con los cursos
+    return view('teachers.courses', compact('teacher', 'courses'));
+}
+
+public function dashboard()
+{
+    $teacherId = Auth::user()->id;
+
+    $courses = Course::where('teacher_id', $teacherId)->get(); // <== No uses withCount si no lo necesitas
+
+    return view('teacher.vista_profesores', compact('courses'));
+}
+
+
+public function courseDetails($id)
+{
+    $course = Course::with(['subjects', 'students'])->findOrFail($id);
+    return view('teacher.course_details', compact('course'));
 }
 
 

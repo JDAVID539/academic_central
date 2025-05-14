@@ -1,0 +1,32 @@
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(45deg, #56ab2f, #a8e063);
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(45deg, #f7971e, #ffd200);
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(45deg, #e53935, #e35d5b);
+}
+
+.icon-circle {
+    border-radius: 50%;
+    padding: 12px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-circle {
+    border-radius: 50%;
+    padding: 12px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
