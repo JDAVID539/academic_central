@@ -180,6 +180,8 @@ Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboa
 use App\Http\Controllers\SuperAdministradorController;
 
 Route::get('/spadministrador', [SuperAdministradorController::class, 'index'])->name('vist_superadministrador');
+
+Route::get('/administrador/notificaciones', [ContactController::class, 'notifications'])->name('administrador.notificaciones');
 Route::get('/listado-colegios', [SuperAdministradorController::class, 'listSchools'])->name('listado.colegios');
 
 Route::get('/colegio/{id}/editar', [SuperAdministradorController::class, 'editSchool'])->name('colegio.editar');

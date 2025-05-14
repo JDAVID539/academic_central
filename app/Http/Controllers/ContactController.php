@@ -32,4 +32,9 @@ class ContactController extends Controller
         return redirect()->route('home')->with('success', 'Mensaje enviado con éxito.');
     }
 
+    public function notifications()
+    {
+        $contacts = Contact::all();
+        return view('administrador.notificaciones', compact('contacts'));
+    }
 }
