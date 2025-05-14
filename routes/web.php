@@ -19,6 +19,8 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SubmitAssignmentController;
 use App\Models\super_administrador;
+use App\Models\Role;
+use App\http\Controllers\AdministradorController;
 
 Route::get('/frmularioasistencia', [AttendanceController::class, 'create'])->name('frm_asistencia');
 Route::post('/asistencia', [AttendanceController::class, 'store'])->name('asistencia.store');
@@ -219,3 +221,7 @@ Route::get('/teachers/{id}/courses', [TeacherController::class, 'courses'])->nam
 Route::get('/teacher/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
 
 Route::get('/teacher/course/{id}/details', [TeacherController::class, 'courseDetails'])->name('teacher.course.details');
+
+
+
+Route::get('/administrador/notificaciones', [SuperAdministradorController::class, 'notificaciones'])->name('administrador.notificaciones');
