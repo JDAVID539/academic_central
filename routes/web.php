@@ -180,8 +180,6 @@ Route::get('/colegio', [SchoolController::class, 'index'])->name('school.dashboa
 use App\Http\Controllers\SuperAdministradorController;
 
 Route::get('/spadministrador', [SuperAdministradorController::class, 'index'])->name('vist_superadministrador');
-
-Route::get('/administrador/notificaciones', [ContactController::class, 'notifications'])->name('administrador.notificaciones');
 Route::get('/listado-colegios', [SuperAdministradorController::class, 'listSchools'])->name('listado.colegios');
 
 Route::get('/colegio/{id}/editar', [SuperAdministradorController::class, 'editSchool'])->name('colegio.editar');
@@ -221,6 +219,3 @@ Route::get('/teachers/{id}/courses', [TeacherController::class, 'courses'])->nam
 Route::get('/teacher/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
 
 Route::get('/teacher/course/{id}/details', [TeacherController::class, 'courseDetails'])->name('teacher.course.details');
-
-
-Route::get('/student/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');

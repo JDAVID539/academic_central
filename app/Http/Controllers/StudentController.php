@@ -7,7 +7,6 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Teacher;
-use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
@@ -63,7 +62,7 @@ public function showSubjectTasks($subjectId)
 
 public function showProfile()
 {
-    $user = \App\Models\User::findOrFail(Auth::id());
+    $user = Auth::user();
     $profile = $user->profile;
     $school = $user->school; // Obtener la escuela asociada si existe
     return view('profile_student', compact('user', 'profile', 'school'));
@@ -89,23 +88,13 @@ public function updateProfile(Request $request)
         // Otros campos que quieras validar
     ]);
 
-    if ($user instanceof \App\Models\User) {
-        $user->update($request->only(['name', 'email']));
-    }
+    $user->update($request->only(['name', 'email']));
     $profile->update($request->only(['phone', 'address']));
 
     return redirect()->route('profile_student')->with('success', 'Perfil actualizado correctamente.');
 }
 
-public function dashboard()
-{
-    $studentId = Auth::id(); // Obtén el ID del estudiante autenticado
-    $subjects = Subject::whereHas('students', function ($query) use ($studentId) {
-        $query->where('student_id', $studentId);
-    })->get();
 
-    return view('estudiante.vista_estudiante', compact('subjects'));
+
+
 }
-
-
-}   
