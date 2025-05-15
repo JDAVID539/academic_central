@@ -41,12 +41,7 @@
               <p>inicio</p>
             </a>
           </li>
-          <li>
-            <a href=">
-              <i class="now-ui-icons education_atom"></i>
-              <p></p>
-            </a>
-          </li>
+          
           <li>
             <a href="{{route('teacher.profile')}}">
               <i class="now-ui-icons users_single-02"></i>
