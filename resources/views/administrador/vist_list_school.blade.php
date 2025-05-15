@@ -2,12 +2,13 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2>Listado de Colegios</h2>
+    <br>
+    <h2><strong> Colegios</strong></h2>
 
     <form method="GET" action="{{ route('listado.colegios') }}" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Buscar por nombre del colegio" value="{{ $query ?? '' }}">
-            <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            <button class="btn btn-primary" type="submit">Buscar</button>
         </div>
     </form>
 
@@ -18,10 +19,12 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Nombre del Colegio</th>
-                <th>Acciones</th>
+                
+                <th><strong>ID</strong></th>
+                <th><strong>Nombre</strong></th>
+                <th><strong>Nombre del Colegio</strong></th>
+                <th><strong>Acciones</strong></th>
+                
             </tr>
         </thead>
         <tbody>

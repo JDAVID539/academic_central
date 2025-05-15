@@ -3,7 +3,8 @@
 @section('title', 'Perfil del Estudiante')
 
 @section('content')
-
+<br>
+<br>
 <div class="container mt-4">
   <div class="card mx-auto" style="max-width: 600px;">
     <div class="card-body text-center">

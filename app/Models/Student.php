@@ -22,7 +22,7 @@ class Student extends Model
     }
     
     public function Course(){
-        return $this ->belongsto('App\Models\Course');
+        return $this->belongsTo('App\Models\Course');
     }
 
     //estudiantes a calificaciones uno a muchos

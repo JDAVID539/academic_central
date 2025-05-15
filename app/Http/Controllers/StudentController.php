@@ -12,6 +12,35 @@ use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
 
+    public function dashboard()
+    {
+        $user = auth()->user();
+        $student = \App\Models\Student::where('user_id', $user->id)->first();
+
+        $assignedSubjectsCount = 0;
+        $assignedTasksCount = 0;
+        $submittedTasksCount = 0;
+
+        if ($student) {
+            // Obtener materias asignadas a través del curso del estudiante
+            $assignedSubjectsCount = $student->Course ? $student->Course->subjects()->count() : 0;
+
+            // Obtener tareas asignadas a través de las materias
+            $assignedTasksCount = 0;
+            if ($student->Course) {
+                $subjects = $student->Course->subjects;
+                foreach ($subjects as $subject) {
+                    $assignedTasksCount += $subject->tasks()->count();
+                }
+            }
+
+            // Obtener tareas entregadas por el estudiante
+            $submittedTasksCount = \App\Models\Submit_Assignment::where('student_id', $student->id)->count();
+        }
+
+        return view('estudiante.vista_estudiante', compact('assignedSubjectsCount', 'assignedTasksCount', 'submittedTasksCount'));
+    }
+
     
     public function create()
     {
@@ -72,6 +101,13 @@ public function editProfile()
 {
     $user = Auth::user();
     $profile = $user->profile; // Obtener perfil asociado
+    if (!$profile) {
+        $profile = new \App\Models\Profile();
+        $profile->user_id = $user->id;
+        $profile->phone = '';
+        $profile->address = '';
+        $profile->save();
+    }
     return view('edit_profile_student', compact('user', 'profile'));
 }
 

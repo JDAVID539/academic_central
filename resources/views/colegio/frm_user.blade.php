@@ -6,7 +6,7 @@
 <div class="formulario">
     
 
-    <h2>Registro de Usuario</h2>
+   <h2 class="fw-bold text-primary">registar usuarios</h2>
 
     @if (session('success'))
         <p class="alerta-exito">{{ session('success') }}</p>
@@ -61,7 +61,7 @@
         </label>
 
         <button type="submit" class="btn-registrar">Registrar Usuario</button>
-    </form>
+        <button type="button"><a href="{{ route('users.index') }}" class="btn-cancelar">Cancelar</button>
 </div>
 @endsection
 

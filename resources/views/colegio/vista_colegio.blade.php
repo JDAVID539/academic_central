@@ -25,7 +25,7 @@
 @section('content')
 <div class="background-image">
     <div class="container py-5">
-        <h1 class="text-center mb-4">Usuarios Registrados</h1>
+       <center> <h2 class="fw-bold text-primary">usuarios registrados</h2></center>
 
         <div class="row text-center">
             <!-- Total de Usuarios -->

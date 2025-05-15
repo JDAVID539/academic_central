@@ -224,4 +224,4 @@ Route::get('/teacher/course/{id}/details', [TeacherController::class, 'courseDet
 
 
 
-Route::get('/administrador/notificaciones', [SuperAdministradorController::class, 'notificaciones'])->name('administrador.notificaciones');
+Route::get('/administrador/notificaciones', [ContactController::class, 'notifications'])->name('administrador.notificaciones');

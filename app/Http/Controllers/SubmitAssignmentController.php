@@ -48,5 +48,13 @@ public function store(Request $request, $taskId)
     return redirect()->back()->with('success', 'Tarea enviada correctamente.');
 }
 
+public function destroy($id)
+{
+    $submitAssignment = Submit_Assignment::findOrFail($id);
+    $submitAssignment->delete();
+
+    return redirect()->back()->with('success', 'Tarea eliminada correctamente.');
+}
+
     
 }

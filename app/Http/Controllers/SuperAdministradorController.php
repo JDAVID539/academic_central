@@ -3,12 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\School;
+use App\Models\User;
+use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdministradorController extends Controller
 {
     public function index()
     {
-        return view('administrador.vist_superadministrador');
+        $totalColegios = School::count();
+        $totalUsuarios = User::count();
+        $totalContactos = Contact::count();
+
+        // Obtener superadministrador autenticado desde la sesión o guard personalizado
+        $superAdminId = session('super_administrador_id');
+        if ($superAdminId) {
+            $superAdmin = \App\Models\super_administrador::find($superAdminId);
+            $userName = $superAdmin ? $superAdmin->name : 'Usuario';
+        } else {
+            $userName = 'Usuario';
+        }
+
+        return view('administrador.vist_superadministrador', compact('totalColegios', 'totalUsuarios', 'totalContactos', 'userName'));
     }
 
     public function listSchools(Request $request)
