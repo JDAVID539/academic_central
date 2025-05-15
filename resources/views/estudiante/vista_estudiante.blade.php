@@ -6,7 +6,7 @@
 
 <br>
 <br>
- <center><h1><strong>Bienvenido, {{ Auth::user()->name }}</strong></h1></center>
+ <center><h1><strong>Bienvenido estudiante {{ Auth::user()->name }}</strong></h1></center>
 
 <div class="container">
     <div class="row">

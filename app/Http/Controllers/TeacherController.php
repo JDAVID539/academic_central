@@ -140,9 +140,17 @@ public function dashboard()
 {
     $teacherId = Auth::user()->id;
 
-    $courses = Course::where('teacher_id', $teacherId)->get(); // <== No uses withCount si no lo necesitas
+    $courses = Course::where('teacher_id', $teacherId)->get();
 
-    return view('teacher.vista_profesores', compact('courses'));
+    $assignedCoursesCount = $courses->count();
+
+    $assignedSubjectsCount = \App\Models\Subject::where('teacher_id', $teacherId)->count();
+
+    $assignedTasksCount = \App\Models\Task::whereHas('subject', function ($query) use ($teacherId) {
+        $query->where('teacher_id', $teacherId);
+    })->count();
+
+    return view('teacher.vista_profesores', compact('courses', 'assignedCoursesCount', 'assignedSubjectsCount', 'assignedTasksCount'));
 }
 
 
